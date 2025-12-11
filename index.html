@@ -53,16 +53,13 @@
 
     footer{margin-top:36px;padding:18px 0;color:var(--muted);font-size:0.9rem;text-align:center}
 
-    /* floating corner images */
+    /* floating corner image */
     .corner-img{
       position:fixed;width:84px;height:84px;border-radius:10px;object-fit:cover;box-shadow:0 8px 20px rgba(2,6,23,0.12);z-index:999;
       border:3px solid rgba(255,255,255,0.9);
       background:#fff;
     }
-    .corner-top-left{top:18px;left:18px}
-    .corner-top-right{top:18px;right:18px}
     .corner-bottom-left{bottom:18px;left:18px}
-    .corner-bottom-right{bottom:18px;right:18px}
 
     /* responsive adjustments */
     @media (max-width:920px){
@@ -73,15 +70,8 @@
   </style>
 </head>
 <body>
-  <!-- Four corner images using same source. Update src if file name differs -->
-<img class="corner-img corner-top-left" src="https://raw.githubusercontent.com/professionalabidkhan-hue/ABID-KHAN-/main/ABID%20KHAN.png"  alt="Abid Khan" />
-  <img class="corner-img corner-top-right"  src="https://raw.githubusercontent.com/professionalabidkhan-hue/ABID-KHAN-/main/ABID%20KHAN.png" alt="Abid Khan" />
-  <img class="corner-img corner-bottom-left" src="https://raw.githubusercontent.com/professionalabidkhan-hue/ABID-KHAN-/main/ABID%20KHAN.png"  alt="Abid Khan" />
-  <img class="corner-img corner-bottom-right"  src="https://raw.githubusercontent.com/professionalabidkhan-hue/ABID-KHAN-/main/ABID%20KHAN.png"  alt="Abid Khan" />
-
-
-
-
+  <!-- Only bottom-left corner image -->
+  <img class="corner-img corner-bottom-left" src="ABID KHAN.jpg" alt="Abid Khan" />
 
   <div class="container">
     <header>
