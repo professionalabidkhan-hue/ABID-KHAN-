@@ -1,33 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Dashboard - Abid Khan's E-Learning Hub</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-<h1>Dashboard</h1>
-
-<div id="cardContainer"></div> <!-- Cards will appear here -->
-
-<script src="dashboard.js" defer></script>
-  const users = [
+const users = [
   // Trainers
   {
     name: "Abid Khan",
+    role: "trainer",
     title: "Full Stack Developer & AI Trainer",
     image: "https://github.com/professionalabidkhan-hue/ABID-KHAN-/blob/main/ABID%20KHAN.png",
     profileUrl: "trainer-abid.html"
   },
   {
     name: "Fatima Ali",
+    role: "trainer",
     title: "Cybersecurity Expert",
     image: "images/fatima.jpg",
     profileUrl: "trainer-fatima.html"
   },
   {
     name: "Ahmed Raza",
+    role: "trainer",
     title: "Data Science & Analytics",
     image: "images/ahmed.jpg",
     profileUrl: "trainer-ahmed.html"
@@ -35,12 +24,14 @@
   // Students
   {
     name: "Student One",
+    role: "student",
     title: "O-Level Student",
     image: "images/student-placeholder.jpg",
     profileUrl: "student-one.html"
   },
   {
     name: "Student Two",
+    role: "student",
     title: "A-Level Student",
     image: "images/student-placeholder.jpg",
     profileUrl: "student-two.html"
@@ -50,18 +41,17 @@
 const container = document.getElementById("cardContainer");
 
 users.forEach(user => {
-  const username = user.name.replace(/\s/g,''); // unique ID for each user
+  const username = user.name.replace(/\s/g,''); // unique ID
   const card = document.createElement("div");
   card.className = "card";
 
   card.innerHTML = `
+    <div class="role-badge ${user.role}">${user.role.toUpperCase()}</div>
     <img src="${user.image}" alt="${user.name}" id="img-${username}">
-    <div class="card-content">
-      <h3>${user.name}</h3>
-      <p>${user.title}</p>
-      <button onclick="window.location.href='${user.profileUrl}'">Visit Profile</button>
-      <input type="file" accept="image/*" onchange="uploadImage(event, '${username}')">
-    </div>
+    <h3>${user.name}</h3>
+    <p>${user.title}</p>
+    <button onclick="window.location.href='${user.profileUrl}'">Visit Profile</button>
+    <input type="file" accept="image/*" onchange="uploadImage(event, '${username}')">
   `;
 
   container.appendChild(card);
@@ -76,7 +66,7 @@ function uploadImage(event, username) {
   formData.append('image', file);
   formData.append('username', username);
 
-  fetch('http://localhost:3001/upload', {  // your backend URL
+  fetch('http://localhost:3001/upload', {
     method: 'POST',
     body: formData
   })
@@ -92,6 +82,3 @@ function uploadImage(event, username) {
     alert('Upload failed!');
   });
 }
-
-</body>
-</html>
