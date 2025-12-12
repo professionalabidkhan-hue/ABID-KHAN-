@@ -5,6 +5,41 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sign Up - Abid Khan's E-Learning Hub</title>
 <style>
+  /* Base select style */
+#category-select {
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid #e6e9ef;
+  background-color: #fff;
+  color: #111827;
+  font-size: 1rem;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  transition: all 0.3s;
+  appearance: none; /* removes default arrow for custom styling if needed */
+}
+
+/* Hover effect */
+#category-select:hover {
+  border-color: var(--accent);
+  box-shadow: 0 2px 6px rgba(11, 99, 211, 0.2);
+}
+
+/* Focus effect */
+#category-select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(11, 99, 211, 0.2);
+}
+
+/* Optional: custom arrow */
+#category-select {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 10 5' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0l5 5 5-5H0z' fill='%236b7280'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 10px 5px;
+}
+
   body{font-family: Arial, sans-serif; display:flex; justify-content:center; align-items:center; min-height:100vh; background:#f7fafc; margin:0;}
   .form-card{background:#fff; padding:40px; border-radius:12px; box-shadow:0 12px 28px rgba(0,0,0,0.08); width:100%; max-width:400px; text-align:center;}
   input{width:100%; padding:12px; margin-bottom:16px; border-radius:10px; border:1px solid #ccc; font-size:1rem;}
@@ -41,7 +76,8 @@
     <option value="student">I want to learn</option>
     <option value="trainer">I want to teach</option>
   </select>
-  <select onchange="filterByCategory(this.value)">
+  <label for="category-select" style="font-weight:600; margin-right:8px;">Category:</
+  <select id="category-select" onchange="filterByCategory(this.value)">
   <option value="All">All Courses</option>
   <option value="IT">IT & Web Development</option>
   <option value="Data Science">Data Science</option>
