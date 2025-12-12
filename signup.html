@@ -34,14 +34,14 @@
   <input type="email" id="email" placeholder="Email Address" required>
   <input type="password" id="password" placeholder="Password" required>
 
-  <div style="text-align:left; margin-bottom:16px;">
-    <label style="display:block; margin-bottom:8px;">
-      <input type="radio" name="role" value="student" checked> I want to learn
-    </label>
-    <label style="display:block;">
-      <input type="radio" name="role" value="trainer"> I want to teach
-    </label>
-  </div>
+ <!-- Role selection dropdown -->
+<div style="margin-bottom:16px; text-align:left;">
+  <label for="role" style="font-weight:600; margin-bottom:4px; display:block;">Select Role</label>
+  <select id="role" style="width:100%; padding:12px; border-radius:10px; border:1px solid #ccc; font-size:1rem;">
+    <option value="student">I want to learn</option>
+    <option value="trainer">I want to teach</option>
+  </select>
+</div>
 
   <input type="text" id="phone" placeholder="Phone Number" required>
   <button class="btn" onclick="sendCode()">Send Verification Code</button>
