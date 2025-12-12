@@ -1,4 +1,19 @@
-const trainers = [
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard - Abid Khan's E-Learning Hub</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>Dashboard</h1>
+
+<div id="cardContainer"></div> <!-- Cards will appear here -->
+
+<script src="dashboard.js" defer></script>
+  const users = [
+  // Trainers
   {
     name: "Abid Khan",
     title: "Full Stack Developer & AI Trainer",
@@ -16,23 +31,35 @@ const trainers = [
     title: "Data Science & Analytics",
     image: "images/ahmed.jpg",
     profileUrl: "trainer-ahmed.html"
+  },
+  // Students
+  {
+    name: "Student One",
+    title: "O-Level Student",
+    image: "images/student-placeholder.jpg",
+    profileUrl: "student-one.html"
+  },
+  {
+    name: "Student Two",
+    title: "A-Level Student",
+    image: "images/student-placeholder.jpg",
+    profileUrl: "student-two.html"
   }
-  // Add more trainers here
 ];
 
 const container = document.getElementById("cardContainer");
 
-trainers.forEach(trainer => {
-  const username = trainer.name.replace(/\s/g,''); // unique ID for each trainer
+users.forEach(user => {
+  const username = user.name.replace(/\s/g,''); // unique ID for each user
   const card = document.createElement("div");
   card.className = "card";
 
   card.innerHTML = `
-    <img src="${trainer.image}" alt="${trainer.name}" id="img-${username}">
+    <img src="${user.image}" alt="${user.name}" id="img-${username}">
     <div class="card-content">
-      <h3>${trainer.name}</h3>
-      <p>${trainer.title}</p>
-      <button onclick="window.location.href='${trainer.profileUrl}'">Visit Profile</button>
+      <h3>${user.name}</h3>
+      <p>${user.title}</p>
+      <button onclick="window.location.href='${user.profileUrl}'">Visit Profile</button>
       <input type="file" accept="image/*" onchange="uploadImage(event, '${username}')">
     </div>
   `;
@@ -56,7 +83,6 @@ function uploadImage(event, username) {
   .then(response => response.json())
   .then(data => {
     if (data.imageUrl) {
-      // Update card image immediately
       document.getElementById(`img-${username}`).src = data.imageUrl;
       alert(`Image for ${username} uploaded successfully!`);
     }
@@ -66,3 +92,6 @@ function uploadImage(event, username) {
     alert('Upload failed!');
   });
 }
+
+</body>
+</html>
