@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Blog - Abid Khan's E-Learning Hub</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Our Blog</h1>
+  <div id="blog-posts">
+    Loading posts...
+  </div>
+
+  <script>
+    const feedUrl = 'https://yourblogname.blogspot.com/feeds/posts/default?alt=json'; // Replace with your Blogger feed
+
+    fetch(feedUrl)
+      .then(response => response.json())
+      .then(data => {
+        const posts = data.feed.entry;
+        const container = document.getElementById('blog-posts');
+        container.innerHTML = '';
+
+        posts.forEach(post => {
+          const title = post.title.$t;
+          const link = post.link.find(l => l.rel === 'alternate').href;
+          const snippet = post.content.$t.replace(/<[^>]+>/g, '').slice(0, 200) + '...';
+
+          const postElement = document.createElement('div');
+          postElement.style.marginBottom = '20px';
+          postElement.innerHTML = `
+            <h3><a href="${link}" target="_blank">${title}</a></h3>
+            <p>${snippet}</p>
+          `;
+          container.appendChild(postElement);
+        });
+      })
+      .catch(err => {
+        document.getElementById('blog-posts').innerHTML = 'Unable to load posts.';
+        console.error(err);
+      });
+  </script>
+</body>
+</html>
