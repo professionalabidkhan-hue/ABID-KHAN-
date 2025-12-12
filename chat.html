@@ -1,3 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>AI Chat Agent</title>
+</head>
+
+<body>
+
+<h2>Ask the AI Agent</h2>
+
+<input id="question" placeholder="Ask something...">
+<button onclick="askAgent()">Ask AI Agent</button>
+
+<p id="reply"></p>
+
 <script>
 async function askAgent() {
   const userMessage = document.getElementById("question").value;
@@ -13,7 +29,5 @@ async function askAgent() {
 }
 </script>
 
-<input id="question" placeholder="Ask something...">
-<button onclick="askAgent()">Ask AI Agent</button>
-
-<p id="reply"></p>
+</body>
+</html>
