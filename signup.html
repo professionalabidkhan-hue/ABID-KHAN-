@@ -1,75 +1,109 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sign Up - Abid Khan's E-Learning Hub</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --accent:#0b63d3;
-    --muted:#6b7280;
-    --bg:#f7fafc;
-    --card:#ffffff;
-    --radius:12px;
-    font-family: 'Inter', sans-serif;
-  }
-
-  body{margin:0; height:100vh; display:flex; justify-content:center; align-items:center; background:linear-gradient(135deg,#eef6ff,#f7fafc);}
-  
-  .form-card{
-    background:var(--card); padding:40px; border-radius:var(--radius); box-shadow:0 12px 28px rgba(0,0,0,0.08); width:100%; max-width:400px; text-align:center;
-  }
-
-  .form-card img{width:80px; height:80px; border-radius:12px; object-fit:cover; margin-bottom:20px;}
-  
-  h2{margin:0 0 20px 0; font-size:1.5rem;}
-  p{color:var(--muted); margin-bottom:20px;}
-  
-  input, select{
-    width:100%; padding:12px 14px; margin-bottom:16px; border-radius:10px; border:1px solid #e6e9ef; font-size:1rem;
-    transition: all 0.3s;
-  }
-  input:focus, select:focus{border-color:var(--accent); outline:none; box-shadow:0 0 6px rgba(11,99,211,0.2);}
-  
-  .btn{width:100%; padding:14px; border-radius:12px; border:0; background:var(--accent); color:#fff; font-weight:600; font-size:1rem; cursor:pointer; transition: all 0.3s;}
+  body{font-family: Arial, sans-serif; display:flex; justify-content:center; align-items:center; min-height:100vh; background:#f7fafc; margin:0;}
+  .form-card{background:#fff; padding:40px; border-radius:12px; box-shadow:0 12px 28px rgba(0,0,0,0.08); width:100%; max-width:400px; text-align:center;}
+  input{width:100%; padding:12px; margin-bottom:16px; border-radius:10px; border:1px solid #ccc; font-size:1rem;}
+  input:focus{border-color:#0b63d3; outline:none; box-shadow:0 0 6px rgba(11,99,211,0.2);}
+  .btn{width:100%; padding:14px; border-radius:12px; border:0; background:#0b63d3; color:#fff; font-weight:600; font-size:1rem; cursor:pointer;}
   .btn:hover{background:#094ca2;}
-  
-  .secondary{background:#eef2ff; color:var(--accent); border:1px solid rgba(11,99,211,0.2);}
+  .secondary{background:#eef2ff; color:#0b63d3; border:1px solid rgba(11,99,211,0.2);}
   .secondary:hover{background:#d6e4ff;}
-  
-  .footer-text{margin-top:12px; font-size:0.9rem; color:var(--muted);}
-  .footer-text a{color:var(--accent); text-decoration:none;}
-  
-  label{display:block; margin-bottom:8px; font-size:0.95rem; color:var(--muted);}
+  .hidden{display:none;}
+  .footer-text{margin-top:12px; font-size:0.9rem; color:#555;}
+  .footer-text a{color:#0b63d3; text-decoration:none;}
 </style>
 </head>
 <body>
 
 <div class="form-card">
-  <img src="ABID KHAN.jpg" alt="Abid Khan" />
-  <h2>Create Account</h2>
-  <p>Join Abid Khan's E-Learning Hub and start your journey!</p>
 
-  <form action="#" method="post" onsubmit="event.preventDefault(); alert('Account created');">
-    <input type="text" placeholder="Full Name" name="name" required>
-    <input type="email" placeholder="Email Address" name="email" required>
-    <input type="password" placeholder="Password" name="password" required>
+  <div id="signupStep">
+    <h2>Create Account</h2>
+    <input type="text" id="name" placeholder="Full Name" required>
+    <input type="email" id="email" placeholder="Email Address" required>
+    <input type="password" id="password" placeholder="Password" required>
+    
+    <div>
+      <label><input type="radio" name="role" value="student" checked> I want to learn</label>
+      <label><input type="radio" name="role" value="trainer"> I want to teach</label>
+    </div>
 
-    <!-- Role selection -->
-    <label for="role">I want to:</label>
-    <select name="role" id="role" required>
-      <option value="student" selected>Learn (Student)</option>
-      <option value="trainer">Teach (Trainer)</option>
-    </select>
+    <input type="text" id="phone" placeholder="Phone Number" required>
+    <button class="btn" onclick="sendCode()">Send Verification Code</button>
+  </div>
 
-    <button type="submit" class="btn">Sign Up</button>
-  </form>
+  <div id="verifyStep" class="hidden">
+    <h2>Verify Phone Number</h2>
+    <p>A 6-digit code was sent to your phone.</p>
+    <input type="text" id="code" placeholder="Enter Verification Code" required>
+    <button class="btn" onclick="verifyCode()">Verify</button>
+  </div>
 
   <div class="footer-text">
     Already have an account? <a href="signin.html">Sign In</a>
   </div>
 </div>
+
+<script>
+const backendURL = "YOUR_APPS_SCRIPT_WEBAPP_URL"; // replace with your Apps Script URL
+
+// Step 1: Send verification code
+function sendCode() {
+  const name = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+  const phone = document.getElementById("phone").value;
+  const role = document.querySelector('input[name="role"]:checked').value;
+
+  fetch(backendURL, {
+    method: "POST",
+    body: JSON.stringify({ action: "signUp", name, email, password, phone, role })
+  })
+  .then(res => res.json())
+  .then(data => {
+    if(data.message === "Sign Up successful") {
+      // Send verification code
+      fetch(backendURL, {
+        method: "POST",
+        body: JSON.stringify({ action: "sendVerificationCode", email, phone })
+      })
+      .then(res => res.json())
+      .then(resData => {
+        alert("Verification code sent to your phone!");
+        document.getElementById("signupStep").classList.add("hidden");
+        document.getElementById("verifyStep").classList.remove("hidden");
+      });
+    } else {
+      alert(data.message);
+    }
+  });
+}
+
+// Step 2: Verify code
+function verifyCode() {
+  const email = document.getElementById("email").value;
+  const enteredCode = document.getElementById("code").value;
+
+  fetch(backendURL, {
+    method: "POST",
+    body: JSON.stringify({ action: "verifyCode", email, enteredCode })
+  })
+  .then(res => res.json())
+  .then(data => {
+    if(data.success) {
+      alert("Phone number verified! Account creation complete.");
+      window.location.href = "signin.html"; // redirect after success
+    } else {
+      alert("Incorrect code, try again.");
+    }
+  });
+}
+</script>
 
 </body>
 </html>
