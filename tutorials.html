@@ -25,6 +25,93 @@
     scroll-behavior: smooth;
   }
 
+  /* ------------------------------
+     NAVBAR
+  ------------------------------ */
+  nav {
+    background: var(--card);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    padding: 0 20px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .nav-container {
+    max-width: var(--max-width);
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+  }
+
+  .nav-brand {
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 20px;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: #111827;
+    font-weight: 500;
+    transition: 0.3s;
+  }
+
+  .nav-links a:hover {
+    color: var(--accent);
+  }
+
+  /* Hamburger */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+  }
+
+  .hamburger div {
+    width: 25px;
+    height: 3px;
+    background: #111827;
+    transition: all 0.3s;
+  }
+
+  @media(max-width:768px){
+    .nav-links {
+      position: absolute;
+      top: 60px;
+      left: 0;
+      right: 0;
+      background: var(--card);
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+      padding: 15px 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-in-out;
+    }
+
+    .nav-links.show {
+      max-height: 300px; /* enough to show all links */
+    }
+
+    .hamburger {
+      display: flex;
+    }
+  }
+
+  /* ------------------------------
+     PAGE CONTENT
+  ------------------------------ */
   .container {max-width: var(--max-width); margin:36px auto; padding:24px;}
   h1 {margin:0 0 20px 0; text-align:center;}
   p {color: var(--muted); margin-bottom:20px; text-align:center;}
@@ -87,6 +174,24 @@
 </head>
 <body>
 
+<!-- NAVBAR -->
+<nav>
+  <div class="nav-container">
+    <a href="#" class="nav-brand">Abid Khan's E-Learning Hub</a>
+    <div class="hamburger" id="hamburger">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <div class="nav-links" id="nav-links">
+      <a href="index.html">Home</a>
+      <a href="courses.html">Courses</a>
+      <a href="tutorials.html">Tutorials</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+</nav>
+
 <div class="container">
   <h1>Tutorials</h1>
   <p>Explore hands-on tutorials in IT, Web Development, Data Science, Cloud, Cybersecurity, Graphic Design, Digital Marketing, O-Level, A-Level, and Quran.</p>
@@ -110,8 +215,16 @@
   </div>
 </div>
 
-<!-- Link your tutorials.js -->
 <script src="tutorials.js" defer></script>
+<script>
+  // Hamburger toggle
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('nav-links');
+
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('show');
+  });
+</script>
 
 </body>
 </html>
