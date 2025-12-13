@@ -4,219 +4,271 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tutorials - Abid Khan's E-Learning Hub</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
 <style>
-  :root {
-    --accent: #0b63d3;
-    --muted: #6b7280;
-    --bg: #f7fafc;
-    --card: #ffffff;
-    --radius: 12px;
-    --max-width: 1200px;
-    --gap: 20px;
-    font-family: 'Inter', sans-serif;
-  }
-/* Optional: ensure navbar items align properly */
-.nav-container img {
-  display: block;
+:root {
+  --accent: #0b63d3;
+  --accent-dark: #094ca2;
+  --muted: #6b7280;
+  --bg: #f7fafc;
+  --card: #ffffff;
+  --radius: 14px;
+  --max-width: 1200px;
+  --gap: 22px;
+  font-family: 'Inter', sans-serif;
 }
-  body {
-    margin:0;
-    font-family: 'Inter', sans-serif;
-    background: var(--bg);
-    color: #111827;
-    scroll-behavior: smooth;
-  }
 
-  /* ------------------------------
-     NAVBAR
-  ------------------------------ */
-  nav {
-    background: var(--card);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    padding: 0 20px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
+* { box-sizing: border-box; }
 
-  .nav-container {
-    max-width: var(--max-width);
-    margin: auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 60px;
-  }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: #111827;
+}
 
-  .nav-brand {
-    font-weight: 700;
-    font-size: 1.3rem;
-    color: var(--accent);
-    text-decoration: none;
-  }
+/* ---------------- NAVBAR ---------------- */
+nav {
+  background: var(--card);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.05);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
 
+.nav-container {
+  max-width: var(--max-width);
+  margin: auto;
+  padding: 0 20px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.corner-img {
+  height: 42px;
+  width: auto;
+}
+
+.nav-brand {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--accent);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 22px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #111827;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.nav-links a:hover {
+  color: var(--accent);
+}
+
+.whatsapp-link {
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.whatsapp-link:hover {
+  background: var(--accent-dark);
+}
+
+/* Hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
+}
+
+.hamburger div {
+  width: 26px;
+  height: 3px;
+  background: #111827;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
   .nav-links {
-    display: flex;
-    gap: 20px;
-  }
-
-  .nav-links a {
-    text-decoration: none;
-    color: #111827;
-    font-weight: 500;
-    transition: 0.3s;
-  }
-
-  .nav-links a:hover {
-    color: var(--accent);
-  }
-
-  /* Hamburger */
-  .hamburger {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
-    gap: 5px;
-  }
-
-  .hamburger div {
-    width: 25px;
-    height: 3px;
-    background: #111827;
-    transition: all 0.3s;
-  }
-
-  @media(max-width:768px){
-    .nav-links {
-      position: absolute;
-      top: 60px;
-      left: 0;
-      right: 0;
-      background: var(--card);
-      flex-direction: column;
-      align-items: center;
-      gap: 15px;
-      padding: 15px 0;
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease-in-out;
-    }
-
-    .nav-links.show {
-      max-height: 300px; /* enough to show all links */
-    }
-
-    .hamburger {
-      display: flex;
-    }
-  }
-
-  /* ------------------------------
-     PAGE CONTENT
-  ------------------------------ */
-  .container {max-width: var(--max-width); margin:36px auto; padding:24px;}
-  h1 {margin:0 0 20px 0; text-align:center;}
-  p {color: var(--muted); margin-bottom:20px; text-align:center;}
-
-  select {
-    margin: 0 auto 20px auto;
-    display: block;
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    font-size: 1rem;
-  }
-
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: var(--gap);
-  }
-
-  .card {
+    position: absolute;
+    top: 64px;
+    left: 0;
+    right: 0;
     background: var(--card);
-    padding:20px;
-    border-radius: var(--radius);
-    box-shadow:0 6px 20px rgba(0,0,0,0.03);
-    transition: all 0.3s;
-    text-align:center;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease;
   }
 
-  .card:hover {
-    transform: translateY(-5px);
-    box-shadow:0 12px 28px rgba(0,0,0,0.08);
+  .nav-links.show {
+    max-height: 300px;
   }
 
-  .card img {
-    width:100%;
-    height:140px;
-    object-fit: cover;
-    border-radius: var(--radius);
-    margin-bottom:12px;
+  .hamburger {
+    display: flex;
   }
 
-  .card h3 {margin:0 0 10px 0; font-size:1.1rem;}
-  .card p {margin:0 0 12px 0; color: var(--muted); font-size:0.95rem;}
-  .btn {
-    display:inline-block;
-    padding:10px 16px;
-    border-radius:12px;
-    background: var(--accent);
-    color:#fff;
-    font-weight:600;
-    text-decoration:none;
-    transition: all 0.3s;
+  .nav-right {
+    gap: 14px;
   }
-  .btn:hover {background:#094ca2;}
+}
 
-  @media (max-width:920px){
-    .grid {grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));}
-  }
+/* ---------------- CONTENT ---------------- */
+.container {
+  max-width: var(--max-width);
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.container > p {
+  text-align: center;
+  color: var(--muted);
+  max-width: 820px;
+  margin: 0 auto 28px;
+}
+
+select {
+  display: block;
+  margin: 0 auto 30px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  font-size: 1rem;
+}
+
+/* Grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--gap);
+}
+
+.card {
+  background: var(--card);
+  padding: 20px;
+  border-radius: var(--radius);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.04);
+  transition: 0.3s;
+  text-align: center;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 30px rgba(0,0,0,0.08);
+}
+
+.card img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: var(--radius);
+  margin-bottom: 14px;
+}
+
+.card h3 {
+  margin: 0 0 8px;
+  font-size: 1.1rem;
+}
+
+.card p {
+  margin: 0 0 14px;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background: var(--accent-dark);
+}
 </style>
 </head>
+
 <body>
 
 <!-- NAVBAR -->
-<!-- NAVBAR -->
 <nav>
- <div class="nav-container">
-  <!-- Left: Logo image -->
-  <div style="display:flex; align-items:center; gap:10px;">
-       <a href="#" class="nav-brand">Abid Khan's E-Learning Hub</a>
-  </div>
-
-  <!-- Right: WhatsApp -->
-  <div class="nav-actions">
-    <a href="https://wa.me/923497469638" target="_blank" class="whatsapp-link">
-      WhatsApp
-    </a>
-  </div>
-</div>
-
-    <!-- Hamburger for mobile -->
-    <div class="hamburger" id="hamburger">
-      <div></div>
-      <div></div>
-      <div></div>
+  <div class="nav-container">
+    <div class="nav-left">
+      <img src="https://raw.githubusercontent.com/professionalabidkhan-hue/ABID-KHAN-/main/ABID%20KHAN.png"
+           alt="Abid Khan" class="corner-img">
+      <a href="index.html" class="nav-brand">Abid Khan's E-Learning Hub</a>
     </div>
 
-    <!-- Navbar links -->
-    <div class="nav-links" id="nav-links">
-      <a href="index.html">Home</a>
-      <a href="courses.html">Courses</a>
-      <a href="tutorials.html">Tutorials</a>
-      <a href="contact.html">Contact</a>
+    <div class="nav-right">
+      <div class="nav-links" id="nav-links">
+        <a href="index.html">Home</a>
+        <a href="courses.html">Courses</a>
+        <a href="tutorials.html">Tutorials</a>
+        <a href="contact.html">Contact</a>
+      </div>
+
+      <a href="https://wa.me/923497469638" target="_blank" class="whatsapp-link">
+        WhatsApp
+      </a>
+
+      <div class="hamburger" id="hamburger">
+        <div></div><div></div><div></div>
+      </div>
     </div>
   </div>
 </nav>
 
-
+<!-- CONTENT -->
 <div class="container">
   <h1>Tutorials</h1>
-  <p>Explore hands-on tutorials in IT, Web Development, Data Science, Cloud, Cybersecurity, Graphic Design, Digital Marketing, O-Level, A-Level, and Quran.</p>
+  <p>
+    Explore hands-on tutorials in IT, Web Development, Data Science, Cloud Computing,
+    Cybersecurity, Graphic Design, Digital Marketing, O-Level, A-Level, and Quran studies.
+  </p>
 
-  <!-- Category Filter Dropdown -->
   <select onchange="filterByCategory(this.value)">
     <option value="All">All Courses</option>
     <option value="IT">IT & Web Development</option>
@@ -229,21 +281,19 @@
     <option value="A-Level">A-Level</option>
   </select>
 
-  <!-- Tutorials Grid -->
   <div class="grid" id="tutorialContainer">
-    <!-- Cards will be injected by tutorials.js -->
+    <!-- Cards injected by tutorials.js -->
   </div>
 </div>
 
 <script src="tutorials.js" defer></script>
 <script>
-  // Hamburger toggle
-  const hamburger = document.getElementById('hamburger');
-  const navLinks = document.getElementById('nav-links');
+const hamburger = document.getElementById('hamburger');
+const navLinks = document.getElementById('nav-links');
 
-  hamburger.addEventListener('click', () => {
-    navLinks.classList.toggle('show');
-  });
+hamburger.addEventListener('click', () => {
+  navLinks.classList.toggle('show');
+});
 </script>
 
 </body>
