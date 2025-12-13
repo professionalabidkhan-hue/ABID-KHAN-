@@ -228,6 +228,35 @@ select {
 .btn:hover {
   background: var(--accent-dark);
 }
+
+/* WhatsApp alias input */
+#numberInput {
+  display: block;
+  margin: 30px auto 15px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  width: 250px;
+  font-size: 1rem;
+}
+
+#numberInputBtn {
+  display: block;
+  margin: 0 auto 40px;
+  padding: 10px 20px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: 0.3s;
+}
+
+#numberInputBtn:hover {
+  background: var(--accent-dark);
+}
 </style>
 </head>
 
@@ -269,6 +298,11 @@ select {
     Cybersecurity, Graphic Design, Digital Marketing, O-Level, A-Level, and Quran studies.
   </p>
 
+  <!-- WhatsApp alias input -->
+  <input type="text" id="numberInput" placeholder="Enter number (e.g. 1111-1111111)">
+  <button id="numberInputBtn" onclick="openWhatsApp()">Message</button>
+
+  <!-- Category Filter Dropdown -->
   <select onchange="filterByCategory(this.value)">
     <option value="All">All Courses</option>
     <option value="IT">IT & Web Development</option>
@@ -281,6 +315,7 @@ select {
     <option value="A-Level">A-Level</option>
   </select>
 
+  <!-- Tutorials Grid -->
   <div class="grid" id="tutorialContainer">
     <!-- Cards injected by tutorials.js -->
   </div>
@@ -294,6 +329,19 @@ const navLinks = document.getElementById('nav-links');
 hamburger.addEventListener('click', () => {
   navLinks.classList.toggle('show');
 });
+
+// WhatsApp alias system
+const numberMap = {
+  "1111-1111111": "923497469638",
+  "2222-2222222": "923497469638"
+};
+
+function openWhatsApp() {
+  const input = document.getElementById('numberInput').value.trim();
+  const actualNumber = numberMap[input] || input; // fallback if number not mapped
+  const url = `https://wa.me/${actualNumber.replace(/[^0-9]/g,'')}`;
+  window.open(url, "_blank");
+}
 </script>
 
 </body>
