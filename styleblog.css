@@ -1,264 +1,300 @@
-/* Abid Khan's E-Learning Hub — Original Work */
-/* styleblog.css */
-/* Base styles */
-body {
-  font-family: 'Inter', Arial, sans-serif;
+/* ------------------------------
+  ABID KHAN'S GLOBAL RESET & BASE
+------------------------------ */
+* {
   margin: 0;
   padding: 0;
-  background: #f9f9f9;
-  color: #333;
+  box-sizing: border-box;
 }
 
-.container {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 20px;
+body {
+  font-family: "Poppins", sans-serif;
+  background: #f5f7fa;
+  color: #222;
+  transition: background 0.3s, color 0.3s;
 }
 
-/* Header / Navbar */
-.header {
-  background: #222;
-  color: #fff;
-  padding: 12px 20px;
+.dark {
+  background: #0d1117;
+  color: #e6edf3;
 }
 
-.header .brand {
+/* ------------------------------
+   NAVBAR
+------------------------------ */
+.abid-header {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.dark .abid-header {
+  background: rgba(20, 20, 20, 0.6);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.abid-nav {
+  max-width: 1200px;
+  margin: auto;
+  padding: 15px 20px;
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 10px;
 }
 
-.header .brand img {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-}
-
-.nav {
-  position: relative;
-  margin-top: 10px;
-}
-
-/* Nav links */
-.nav-links {
+.abid-nav-links {
   display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
+  gap: 20px;
+  align-items: center;
 }
 
-.nav-links a,
-.btn-toggle {
-  color: #fff;
+.abid-nav-links a {
   text-decoration: none;
-  font-weight: 600;
-  background: #444;
-  padding: 6px 12px;
-  border-radius: 6px;
+  color: inherit;
+  font-weight: 500;
+  transition: 0.3s;
 }
 
-.nav-links a:hover {
-  background: #0077cc;
+.abid-nav-links a:hover {
+  color: #1a73e8;
 }
 
 .btn-toggle {
+  padding: 6px 12px;
   border: none;
+  background: #1a73e8;
+  color: white;
+  border-radius: 6px;
   cursor: pointer;
+  transition: 0.3s;
 }
 
-/* Hamburger button (animated) */
-.hamburger {
+.btn-toggle:hover {
+  background: #1558b0;
+}
+
+/* Hamburger */
+.abid-hamburger {
   display: none;
   flex-direction: column;
-  justify-content: space-around;
-  width: 30px;
-  height: 24px;
+  gap: 4px;
   background: none;
   border: none;
   cursor: pointer;
-  padding: 0;
 }
 
-.hamburger span {
-  display: block;
-  width: 100%;
+.abid-hamburger span {
+  width: 25px;
   height: 3px;
-  background: #fff;
-  border-radius: 2px;
-  transition: all 0.3s ease;
+  background: #222;
+  transition: 0.3s;
 }
 
-/* Animation into X */
-.hamburger.open span:nth-child(1) {
-  transform: rotate(45deg) translate(5px, 5px);
+.dark .abid-hamburger span {
+  background: #e6edf3;
 }
-.hamburger.open span:nth-child(2) {
+
+.abid-hamburger.open span:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+.abid-hamburger.open span:nth-child(2) {
   opacity: 0;
 }
-.hamburger.open span:nth-child(3) {
-  transform: rotate(-45deg) translate(6px, -6px);
+.abid-hamburger.open span:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
 }
 
-/* Mobile styles */
+/* Mobile */
 @media (max-width: 768px) {
-  .hamburger {
-    display: flex;
-  }
-  .nav-links {
-    display: none;
-    flex-direction: column;
-    background: #222;
+  .abid-hamburger { display: flex; }
+  .abid-nav-links {
     position: absolute;
-    top: 50px;
-    left: 0;
-    width: 100%;
-    padding: 10px;
+    top: 70px;
+    right: 0;
+    background: inherit;
+    flex-direction: column;
+    width: 200px;
+    padding: 20px;
+    display: none;
   }
-  .nav-links.show {
+  .abid-nav-links.show {
     display: flex;
-    animation: slideDown 0.3s ease;
   }
 }
 
-/* Slide-down animation */
-@keyframes slideDown {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* Page title */
+/* ------------------------------
+   PAGE TITLE
+------------------------------ */
 .page-title {
   text-align: center;
-  margin: 20px 0;
+  margin: 40px 0 20px;
+  font-size: 2.4rem;
+  font-weight: 700;
 }
 
-/* Controls */
+/* ------------------------------
+   CONTROLS (Search, Filter, Sort)
+------------------------------ */
 .controls {
+  max-width: 900px;
+  margin: auto;
   display: flex;
-  gap: 10px;
+  gap: 15px;
   justify-content: center;
-  margin-bottom: 20px;
+  flex-wrap: wrap;
 }
 
-.input,
-select {
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+.controls input,
+.controls select {
+  padding: 12px 15px;
+  border-radius: 8px;
+  border: 2px solid #1a73e8;
+  font-size: 1rem;
+  outline: none;
+  transition: 0.3s;
 }
 
-/* Featured post */
+.controls input:focus,
+.controls select:focus {
+  box-shadow: 0 0 8px rgba(26,115,232,0.4);
+}
+
+/* ------------------------------
+   FEATURED POST
+------------------------------ */
 .featured {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 25px;
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(10px);
+  border-radius: 14px;
   display: flex;
   gap: 20px;
-  background: #fff;
-  border-radius: 8px;
-  padding: 20px;
-  margin-bottom: 30px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  transition: 0.3s;
+}
+
+.dark .featured {
+  background: rgba(30,30,30,0.6);
 }
 
 .featured img.media {
-  max-width: 300px;
-  border-radius: 8px;
+  width: 260px;
+  border-radius: 12px;
+  object-fit: cover;
 }
 
 .featured .body h2 {
-  margin-top: 0;
+  margin-bottom: 8px;
 }
 
-/* Grid of posts */
+.featured .btn {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 16px;
+  background: #1a73e8;
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.featured .btn:hover {
+  background: #1558b0;
+}
+
+/* ------------------------------
+   GRID OF POSTS
+------------------------------ */
 .grid {
+  max-width: 1200px;
+  margin: auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+  padding: 20px;
 }
 
 .card {
-  background: #fff;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(8px);
+  border-radius: 14px;
+  padding: 15px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  transition: 0.3s;
+}
+
+.dark .card {
+  background: rgba(25,25,25,0.6);
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
 }
 
 .card img.thumb {
   width: 100%;
-  height: auto;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px;
 }
 
-.card .content {
-  padding: 15px;
-}
-
-.card h3 {
-  margin-top: 0;
-}
-
-.card .meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.card .btn {
+  display: inline-block;
   margin-top: 10px;
-}
-
-.btn {
-  background: #0077cc;
-  color: #fff;
-  padding: 6px 12px;
+  padding: 8px 14px;
+  background: #1a73e8;
+  color: white;
   border-radius: 6px;
   text-decoration: none;
+  transition: 0.3s;
 }
 
-.btn:hover {
-  background: #005fa3;
+.card .btn:hover {
+  background: #1558b0;
 }
 
-/* Pagination */
+/* ------------------------------
+   PAGINATION
+------------------------------ */
 .pagination {
   text-align: center;
-  margin-top: 20px;
+  margin: 30px 0;
 }
 
 .page-btn {
+  padding: 8px 14px;
   margin: 0 5px;
-  padding: 6px 12px;
-  border: 1px solid #0077cc;
-  background: #fff;
-  color: #0077cc;
+  border: none;
+  background: #e0e7ff;
+  color: #1a73e8;
   border-radius: 6px;
   cursor: pointer;
+  transition: 0.3s;
+}
+
+.page-btn:hover {
+  background: #c7d2fe;
 }
 
 .page-btn.active {
-  background: #0077cc;
-  color: #fff;
+  background: #1a73e8;
+  color: white;
 }
 
-/* Footer */
-.site-footer {
+/* ------------------------------
+   FOOTER
+------------------------------ */
+.abid-footer {
   text-align: center;
-  padding: 20px;
-  background: #222;
-  color: #fff;
+  padding: 25px;
   margin-top: 40px;
-}
-
-/* Dark mode */
-body.dark {
-  background: #121212;
-  color: #ddd;
-}
-
-body.dark .header,
-body.dark .site-footer {
-  background: #000;
-}
-
-body.dark .card,
-body.dark .featured {
-  background: #1e1e1e;
-  color: #ddd;
-}
-
-body.dark .btn {
-  background: #29a3ef;
+  background: #1a73e8;
+  color: white;
+  font-weight: 500;
 }
