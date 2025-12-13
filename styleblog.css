@@ -8,6 +8,58 @@ body {
   background: #f9f9f9;
   color: #333;
 }
+/* Navbar */
+.nav {
+  position: relative;
+}
+
+.hamburger {
+  display: none;
+  font-size: 24px;
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+}
+
+.nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.nav-links a, .btn-toggle {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  background: #444;
+  padding: 6px 12px;
+  border-radius: 6px;
+}
+
+.nav-links a:hover {
+  background: #0077cc;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    background: #222;
+    position: absolute;
+    top: 40px;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+  }
+  .nav-links.show {
+    display: flex;
+  }
+}
 
 .container {
   max-width: 1100px;
