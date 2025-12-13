@@ -16,7 +16,10 @@
     --gap: 20px;
     font-family: 'Inter', sans-serif;
   }
-
+/* Optional: ensure navbar items align properly */
+.nav-container img {
+  display: block;
+}
   body {
     margin:0;
     font-family: 'Inter', sans-serif;
@@ -175,14 +178,24 @@
 <body>
 
 <!-- NAVBAR -->
+<!-- NAVBAR -->
 <nav>
   <div class="nav-container">
-    <a href="#" class="nav-brand">Abid Khan's E-Learning Hub</a>
+    <!-- Left: Logo image -->
+    <div style="display:flex; align-items:center; gap:10px;">
+      <img src="https://raw.githubusercontent.com/professionalabidkhan-hue/ABID-KHAN-/blob/main/ABID%20KHAN.png?raw=true" 
+           alt="Abid Khan" style="width:40px; height:40px; border-radius:50%; border:2px solid #4fc3f7;">
+      <a href="#" class="nav-brand">Abid Khan's E-Learning Hub</a>
+    </div>
+
+    <!-- Hamburger for mobile -->
     <div class="hamburger" id="hamburger">
       <div></div>
       <div></div>
       <div></div>
     </div>
+
+    <!-- Navbar links -->
     <div class="nav-links" id="nav-links">
       <a href="index.html">Home</a>
       <a href="courses.html">Courses</a>
@@ -191,6 +204,7 @@
     </div>
   </div>
 </nav>
+
 
 <div class="container">
   <h1>Tutorials</h1>
