@@ -15,6 +15,9 @@
       padding: 20px;
       position: relative;
     }
+html {
+  scroll-behavior: smooth;
+}
 
     /* Overlay for readability */
     body::before {
