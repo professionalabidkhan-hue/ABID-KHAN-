@@ -60,15 +60,28 @@ nav {
   align-items:center;
   height:60px;
 }
+
+/* Brand + profile image */
+.nav-brand-container {
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
 .nav-brand {
   font-weight:700;
   font-size:1.4rem;
   color:#4fc3f7;
   text-decoration:none;
-  display:flex;
-  align-items:center;
-  gap:10px;
 }
+.nav-profile {
+  width:35px;
+  height:35px;
+  border-radius:50%;
+  border:2px solid #4fc3f7;
+  object-fit:cover;
+}
+
+/* Links */
 .nav-links {
   display:flex;
   gap:20px;
@@ -84,6 +97,7 @@ nav {
 /* Hamburger */
 .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; }
 .hamburger div { width:25px; height:3px; background:#fff; transition:0.3s; }
+
 @media(max-width:768px){
   .nav-links {
     position:absolute;
@@ -159,10 +173,18 @@ footer {
 <!-- Navbar -->
 <nav>
   <div class="nav-container">
-    <a href="index.html" class="nav-brand">Abid Khan's E-Learning Hub</a>
+    <!-- Brand + Profile Image -->
+    <div class="nav-brand-container">
+      <a href="index.html" class="nav-brand">Abid Khan's E-Learning Hub</a>
+      <img src="https://raw.githubusercontent.com/professionalabidkhan-hue/ABID-KHAN-/blob/main/ABID%20KHAN.png?raw=true" alt="Profile" class="nav-profile">
+    </div>
+
+    <!-- Hamburger -->
     <div class="hamburger" id="hamburger">
       <div></div><div></div><div></div>
     </div>
+
+    <!-- Links -->
     <div class="nav-links" id="nav-links">
       <a href="index.html">Home</a>
       <a href="courses.html">Courses</a>
