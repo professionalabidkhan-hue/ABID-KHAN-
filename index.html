@@ -317,14 +317,20 @@
   &copy; 2025 Abid Khan's E-Learning Hub. All rights reserved.
 </footer>
 <script>
-  // Highlight current page link
+  // Highlight based on URL
   const current = window.location.pathname.split("/").pop();
   document.querySelectorAll("nav a").forEach(link => {
     if(link.getAttribute("href") === current){
       link.classList.add("active");
     }
+    // Also handle click events
+    link.addEventListener("click", e => {
+      document.querySelectorAll("nav a").forEach(a => a.classList.remove("active"));
+      e.currentTarget.classList.add("active");
+    });
   });
 </script>
+
 
 </body>
 </html>
