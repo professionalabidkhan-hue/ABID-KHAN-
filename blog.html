@@ -11,23 +11,21 @@
 
   <!-- Navbar -->
   <header class="header">
-    <div class="container inner">
-      <div class="brand">
-        <img src="profile.jpg" alt="Abid Khan">
-        <div>Abid Khan's E-Learning Hub</div>
-      </div>
-      <nav class="nav">
-        <a href="index.html">Home</a>
-        <a href="dashboard.html">Dashboard</a>
-        <a href="courses.html">Courses</a>
-        <a href="tutorials.html">Tutorials</a>
-        <a href="cheatsheets.html">Cheat Sheets</a>
-        <a href="projects.html">Projects</a>
-        <a href="blog.html">Blog</a>
-        <a href="contact.html">Contact</a>
-        <button id="themeToggle" class="btn-toggle">Toggle</button>
-      </nav>
-    </div>
+  <nav class="nav">
+  <button class="hamburger" id="hamburger">&#9776;</button>
+  <div class="nav-links" id="navLinks">
+    <a href="index.html">Home</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="courses.html">Courses</a>
+    <a href="tutorials.html">Tutorials</a>
+    <a href="cheatsheets.html">Cheat Sheets</a>
+    <a href="projects.html">Projects</a>
+    <a href="blog.html">Blog</a>
+    <a href="contact.html">Contact</a>
+    <button id="themeToggle" class="btn-toggle">Toggle</button>
+  </div>
+</nav>
+
   </header>
 
   <main class="container">
@@ -200,5 +198,14 @@
     document.getElementById('themeToggle').addEventListener('click', ()=> document.body.classList.toggle('dark'));
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
+  <script>
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('navLinks');
+
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('show');
+  });
+</script>
+
 </body>
 </html>
