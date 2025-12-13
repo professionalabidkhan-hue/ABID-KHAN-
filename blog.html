@@ -60,20 +60,16 @@
   </footer>
 
   <!-- ✅ Your Blogger feed script -->
-  /* === Configuration === */
+    /* === Configuration === */
+  <script>
+/* === Blogger Feed Config === */
 const FEED_URL = "https://abidkhanelearninghub.blogspot.com/feeds/posts/default?alt=json";
 const POSTS_PER_PAGE = 6;
 
-/* === Utility === */
 const q = s => document.querySelector(s);
-const bind = (sel, ev, fn) => q(sel).addEventListener(ev, fn);
+let allPosts = [], filtered = [], page = 1;
 
-/* === State === */
-let allPosts = [];
-let filtered = [];
-let page = 1;
-
-/* === Fetch Blogger feed === */
+/* === Fetch Blogger Feed === */
 fetch(FEED_URL)
   .then(r => r.json())
   .then(data => {
@@ -90,20 +86,21 @@ fetch(FEED_URL)
     q('#postsGrid').innerHTML = '<p class="muted">Failed to load posts.</p>';
   });
 
-/* === Helpers to read post data === */
-function getTitle(p){ return p.title.$t || 'Untitled' }
-function getLink(p){ return (p.link.find(l=>l.rel==='alternate')||{}).href || '#' }
-function getContentText(p){ return (p.content && p.content.$t) ? p.content.$t.replace(/<[^>]+>/g,'') : '' }
-function getSnippet(p,len=150){ const t=getContentText(p).trim(); return (t.length>len)? t.slice(0,len)+'...' : t }
+/* === Helpers === */
+function getTitle(p){ return p.title.$t || 'Untitled'; }
+function getLink(p){ return (p.link.find(l=>l.rel==='alternate')||{}).href || '#'; }
+function getContentText(p){ return (p.content && p.content.$t) ? p.content.$t.replace(/<[^>]+>/g,'') : ''; }
+function getSnippet(p,len=150){ const t=getContentText(p).trim(); return (t.length>len)? t.slice(0,len)+'...' : t; }
 function getThumb(p){
   if(p.media$thumbnail) return p.media$thumbnail.url;
   const m = (p.content && p.content.$t) ? p.content.$t.match(/<img[^>]+src="([^">]+)"/i) : null;
   return m ? m[1] : '';
 }
-function getCategories(p){ return p.category ? p.category.map(c=>c.term) : [] }
-function getPublished(p){ return new Date((p.published && p.published.$t) || (p.updated && p.updated.$t) || Date.now()) }
+function getCategories(p){ return p.category ? p.category.map(c=>c.term) : []; }
+function getAuthor(p){ return (p.author && p.author[0] && p.author[0].name.$t) || 'Unknown'; }
+function getPublished(p){ return new Date((p.published && p.published.$t) || (p.updated && p.updated.$t) || Date.now()); }
 
-/* === Render featured post === */
+/* === Featured Post === */
 function renderFeatured(){
   const post = allPosts[0];
   if(!post) return;
@@ -112,6 +109,7 @@ function renderFeatured(){
     ${img ? `<img class="media" src="${img}" alt="${getTitle(post)}">` : ''}
     <div class="body">
       <h2>${getTitle(post)}</h2>
+      <p><em>By ${getAuthor(post)} • ${getPublished(post).toLocaleDateString()}</em></p>
       <p>${getSnippet(post,300)}</p>
       <a class="btn" href="${getLink(post)}" target="_blank">Read full post</a>
     </div>`;
@@ -131,11 +129,7 @@ function populateCategories(){
   });
 }
 
-/* === Filter / search / sort === */
-bind('#searchBox','input', ()=> { page=1; applyFilters(); });
-bind('#categoryFilter','change', ()=> { page=1; applyFilters(); });
-bind('#sortBy','change', ()=> { page=1; applyFilters(); });
-
+/* === Filters === */
 function applyFilters(){
   const qText = q('#searchBox').value.trim().toLowerCase();
   const cat = q('#categoryFilter').value;
@@ -156,7 +150,7 @@ function applyFilters(){
   renderPagination();
 }
 
-/* === Render page of posts === */
+/* === Render Posts === */
 function renderPage(){
   const grid = q('#postsGrid');
   grid.innerHTML = '';
@@ -168,14 +162,16 @@ function renderPage(){
   }
   pageItems.forEach(p=>{
     const thumb = getThumb(p);
+    const cats = getCategories(p).join(', ');
     const html = `
       <article class="card">
         ${thumb ? `<img class="thumb" src="${thumb}" alt="${getTitle(p)}">` : ''}
         <div class="content">
           <h3>${getTitle(p)}</h3>
+          <p><em>By ${getAuthor(p)} • ${getPublished(p).toLocaleDateString()}</em></p>
           <p>${getSnippet(p,140)}</p>
           <div class="meta">
-            <small class="muted">${getPublished(p).toLocaleDateString()}</small>
+            <small class="muted">${cats ? 'Categories: ' + cats : ''}</small>
             <a class="btn" href="${getLink(p)}" target="_blank">Read</a>
           </div>
         </div>
@@ -184,7 +180,7 @@ function renderPage(){
   });
 }
 
-/* === Pagination UI === */
+/* === Pagination === */
 function renderPagination(){
   const total = Math.ceil(filtered.length / POSTS_PER_PAGE);
   const wrap = q('#pagination');
@@ -199,11 +195,10 @@ function renderPagination(){
   }
 }
 
-/* === Keyboard shortcuts for pagination === */
-document.addEventListener('keydown', e=>{
-  if(e.key === 'ArrowRight') { if(page < Math.ceil(filtered.length/POSTS_PER_PAGE)) { page++; renderPage(); renderPagination(); } }
-  if(e.key === 'ArrowLeft') { if(page>1){ page--; renderPage(); renderPagination(); } }
-});
+/* === Event bindings === */
+q('#searchBox').addEventListener('input', ()=> { page=1; applyFilters(); });
+q('#categoryFilter').addEventListener('change', ()=> { page=1; applyFilters(); });
+q('#sortBy').addEventListener('change', ()=> { page=1; applyFilters(); });
 
 /* === Theme toggle === */
 document.getElementById('themeToggle').addEventListener('click', ()=> document.body.classList.toggle('dark'));
@@ -211,15 +206,16 @@ document.getElementById('themeToggle').addEventListener('click', ()=> document.b
 /* === Footer year === */
 document.getElementById('year').textContent = new Date().getFullYear();
 
-/* === Hamburger menu toggle === */
+/* === Hamburger menu === */
 const hamburger = document.getElementById('hamburger');
 const navLinks = document.getElementById('navLinks');
-
 hamburger.addEventListener('click', () => {
   navLinks.classList.toggle('show');
-  // Optional: animate hamburger into "X"
-  hamburger.classList.toggle('open');
+  hamburger.classList.toggle('open'); // optional for animation
 });
 
+
+    
+  </script>
 </body>
 </html>
