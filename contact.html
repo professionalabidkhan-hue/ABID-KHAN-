@@ -25,6 +25,29 @@ body::before {
   backdrop-filter: blur(6px);
   z-index: -1;
 }
+.abidkhan-corner-img {
+  height: 52px;
+  width: 52px;
+  border-radius: 50%; /* makes it circular */
+  object-fit: cover;
+  border: 2px solid #0b63d3; /* accent border */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25); /* subtle shadow */
+  background: linear-gradient(145deg, #ffffff 0%, #e6e6e6 100%);
+  position: relative;
+}
+
+/* Glossy shine overlay */
+.abidkhan-corner-img::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 60%);
+  pointer-events: none;
+}
 
 /* ------------------------------
    CORNER IMAGE
@@ -41,58 +64,8 @@ body::before {
   z-index:1000;
 }
 
-/* ------------------------------
-   NAVBAR
------------------------------- */
-nav {
-  background: rgba(0,0,0,0.7);
-  backdrop-filter: blur(10px);
-  position: sticky;
-  top:0;
-  z-index: 999;
-  padding: 0 20px;
-}
-.nav-container {
-  max-width: 1200px;
-  margin:auto;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  height:60px;
-}
 
-/* Brand + profile image */
-.nav-brand-container {
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-.nav-brand {
-  font-weight:700;
-  font-size:1.4rem;
-  color:#4fc3f7;
-  text-decoration:none;
-}
-.nav-profile {
-  width:35px;
-  height:35px;
-  border-radius:50%;
-  border:2px solid #4fc3f7;
-  object-fit:cover;
-}
 
-/* Links */
-.nav-links {
-  display:flex;
-  gap:20px;
-}
-.nav-links a {
-  color:#fff;
-  font-weight:500;
-  text-decoration:none;
-  transition:0.3s;
-}
-.nav-links a:hover { color:#4fc3f7; }
 
 /* Hamburger */
 .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; }
@@ -166,31 +139,23 @@ footer {
 </style>
 </head>
 <body>
+<div class="abidkhan-dashboard-profile">
+  <img src="https://raw.githubusercontent.com/professionalabidkhan-hue/ABID-KHAN-/main/ABID KHAN.png" 
+       alt="Abid Khan" class="abidkhan-profile-img">
+  <h2>Welcome, Abid Khan</h2>
+</div>
 
 <!-- Corner Logo -->
-<img src="https://raw.githubusercontent.com/professionalabidkhan-hue/ABID-KHAN-/main/ABID%20KHAN.png" alt="Abid Khan" class="corner-img">
+<img src="https://raw.githubusercontent.com/professionalabidkhan-hue/ABID-KHAN-/main/ABID KHAN.png" alt="Abid Khan" class="corner-img">
 
 
 <!-- Navbar -->
-<nav>
-  <div class="nav-container">
-    <!-- Brand + Profile Image -->
-    <div class="nav-brand-container">
-      <a href="index.html" class="nav-brand">Abid Khan's E-Learning Hub</a>
-        <img src="https://raw.githubusercontent.com/professionalabidkhan-hue/ABID-KHAN-/main/ABID KHAN.png">
-    </div>
-
-    <!-- Hamburger -->
-    <div class="hamburger" id="hamburger">
-      <div></div><div></div><div></div>
-    </div>
-
-    <!-- Links -->
-    <div class="nav-links" id="nav-links">
-      <a href="index.html">Home</a>
-      <a href="courses.html">Courses</a>
-      <a href="tutorials.html">Tutorials</a>
-      <a href="contact.html">Contact</a>
+<nav class="abidkhan-navbar">
+  <div class="abidkhan-nav-container">
+    <div class="abidkhan-nav-brand-container">
+      <a href="index.html" class="abidkhan-nav-brand">Abid Khan's E-Learning Hub</a>
+      <img src="https://raw.githubusercontent.com/professionalabidkhan-hue/ABID-KHAN-/main/ABID KHAN.png" 
+           alt="Abid Khan" class="abidkhan-corner-img">
     </div>
   </div>
 </nav>
