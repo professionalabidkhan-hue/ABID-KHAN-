@@ -1,125 +1,212 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tutorials - Abid Khan's E-Learning Hub</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tutorials - Abid Khan's E-Learning Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"/>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --accent: #0b63d3;
+      --accent-dark: #094ca2;
+      --text: #111827;
+      --muted: #6b7280;
+      --bg: #f7fafc;
+      --card: #ffffff;
+      --radius: 14px;
+      --max-width: 1200px;
+      --gap: 22px;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin:0; padding:0; font-family: 'Inter', sans-serif; color: var(--text); background: var(--bg); }
 
-<style>
-/* Glossy Navbar */
-.abidkhan-navbar {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: linear-gradient(
-      rgba(255, 255, 255, 0.85),
-      rgba(255, 255, 255, 0.65)
-    ),
-    url("https://raw.githubusercontent.com/professionalabidkhan-hue/ABID-KHAN-/main/ABID%20KHAN.png") center/cover no-repeat;
-  backdrop-filter: blur(12px);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-  border-bottom: 2px solid rgba(11, 99, 211, 0.4);
-}
+    /* Glossy Navbar using your image */
+    .abidkhan-navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background:
+        linear-gradient( rgba(255,255,255,0.85), rgba(255,255,255,0.65) ),
+        url("https://raw.githubusercontent.com/professionalabidkhan-hue/ABID-KHAN-/main/ABID%20KHAN.png") center/cover no-repeat;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+      border-bottom: 2px solid rgba(11, 99, 211, 0.35);
+    }
+    .abidkhan-nav-container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 20px;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .abidkhan-nav-left { display:flex; align-items:center; gap:12px; }
+    .abidkhan-corner-img {
+      height: 46px; width: 46px; border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--accent);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+      position: relative;
+      background: linear-gradient(145deg, #ffffff 0%, #e6e6e6 100%);
+    }
+    .abidkhan-corner-img::after {
+      content:""; position:absolute; inset:0; border-radius:50%;
+      background: linear-gradient(135deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 60%);
+      pointer-events:none;
+    }
+    .abidkhan-nav-brand {
+      font-size: 1.25rem; font-weight: 700; color: var(--accent); text-decoration: none;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      white-space: nowrap;
+    }
 
-.abidkhan-nav-container {
-  max-width: 1200px;
-  margin: auto;
-  padding: 0 20px;
-  height: 72px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
+    .abidkhan-nav-right { display:flex; align-items:center; gap:18px; }
+    .abidkhan-nav-links { display:flex; gap:18px; }
+    .abidkhan-nav-links a {
+      text-decoration:none; color: var(--text); font-weight:600; transition:0.25s;
+    }
+    .abidkhan-nav-links a:hover { color: var(--accent); text-shadow: 0 1px 4px rgba(11,99,211,0.35); }
 
-.abidkhan-nav-brand {
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: #0b63d3;
-  text-decoration: none;
-  text-shadow: 0 2px 6px rgba(0,0,0,0.2);
-}
+    /* Hamburger (mobile) */
+    .abidkhan-hamburger { display:none; flex-direction:column; cursor:pointer; gap:5px; }
+    .abidkhan-hamburger div { width:26px; height:3px; background: var(--text); transition:0.3s; }
+    .abidkhan-hamburger.open div:nth-child(1){ transform: translateY(4px) rotate(45deg); }
+    .abidkhan-hamburger.open div:nth-child(2){ opacity:0; }
+    .abidkhan-hamburger.open div:nth-child(3){ transform: translateY(-4px) rotate(-45deg); }
 
-.abidkhan-nav-links a {
-  text-decoration: none;
-  color: #111827;
-  font-weight: 600;
-  transition: 0.3s;
-}
+    @media (max-width: 768px){
+      .abidkhan-hamburger { display:flex; }
+      .abidkhan-nav-links {
+        position:absolute; top:72px; left:0; right:0;
+        background: rgba(255,255,255,0.95);
+        backdrop-filter: blur(10px);
+        flex-direction:column; align-items:center; gap:14px; padding:14px 0;
+        max-height:0; overflow:hidden; transition:max-height 0.35s ease;
+        border-bottom: 1px solid rgba(0,0,0,0.06);
+      }
+      .abidkhan-nav-links.show { max-height: 280px; }
+    }
 
-.abidkhan-nav-links a:hover {
-  color: #0b63d3;
-  text-shadow: 0 1px 4px rgba(11,99,211,0.4);
-}
+    /* Page header */
+    .abidkhan-container {
+      max-width: var(--max-width);
+      margin: 28px auto;
+      padding: 0 20px;
+    }
+    .abidkhan-container h1 { text-align:center; margin: 8px 0 6px; }
+    .abidkhan-subtitle {
+      text-align:center; color: var(--muted); max-width: 820px; margin: 0 auto 20px;
+    }
 
+    /* Grid and cards */
+    .abidkhan-grid {
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: var(--gap);
+    }
+    .abidkhan-card {
+      background: var(--card);
+      padding: 18px;
+      border-radius: var(--radius);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+      transition: 0.3s;
+      text-align:center;
+    }
+    .abidkhan-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 14px 30px rgba(0,0,0,0.12);
+    }
+    .abidkhan-card img {
+      width: 100%; height: 140px; object-fit: cover; border-radius: var(--radius); margin-bottom: 12px;
+    }
+    .abidkhan-card h3 { margin: 0 0 8px; font-size: 1.05rem; }
+    .abidkhan-card p { margin: 0 0 12px; font-size: 0.95rem; color: var(--muted); }
 
-.abidkhan-card {
-  background: var(--card);
-  padding: 20px;
-  border-radius: var(--radius);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.04);
-  transition: 0.3s;
-  text-align: center;
-}
-
-.abidkhan-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 14px 30px rgba(0,0,0,0.08);
-}
-</style>
+    .abidkhan-btn {
+      display:inline-block; padding:10px 16px; border-radius:999px;
+      background: var(--accent); color:#fff; font-weight:700; text-decoration:none; transition:0.25s;
+    }
+    .abidkhan-btn:hover { background: var(--accent-dark); }
+  </style>
 </head>
 
 <body>
-<nav class="abidkhan-navbar">
-  <div class="abidkhan-nav-container">
-    <div class="abidkhan-nav-left">
-      <img src="https://raw.githubusercontent.com/professionalabidkhan-hue/ABID-KHAN-/main/ABID%20KHAN.png"
-           alt="Abid Khan" class="abidkhan-corner-img">
-      <a href="index.html" class="abidkhan-nav-brand">Abid Khan's E-Learning Hub</a>
-    </div>
+  <!-- Navbar -->
+  <nav class="abidkhan-navbar">
+    <div class="abidkhan-nav-container">
+      <div class="abidkhan-nav-left">
+        <img src="https://raw.githubusercontent.com/professionalabidkhan-hue/ABID-KHAN-/main/ABID%20KHAN.png"
+             alt="Abid Khan" class="abidkhan-corner-img">
+        <a href="index.html" class="abidkhan-nav-brand">Abid Khan's E-Learning Hub</a>
+      </div>
 
-    <div class="abidkhan-nav-right">
-      <div class="abidkhan-nav-links" id="abidkhan-nav-links">
-        <a href="index.html">Home</a>
-        <a href="courses.html">Courses</a>
-        <a href="tutorials.html">Tutorials</a>
-        <a href="contact.html">Contact</a>
+      <div class="abidkhan-nav-right">
+        <div class="abidkhan-nav-links" id="abidkhan-nav-links">
+          <a href="index.html">Home</a>
+          <a href="courses.html">Courses</a>
+          <a href="tutorials.html">Tutorials</a>
+          <a href="contact.html">Contact</a>
+        </div>
+
+        <!-- Hamburger for mobile -->
+        <div class="abidkhan-hamburger" id="abidkhan-hamburger" aria-label="Toggle navigation" role="button">
+          <div></div><div></div><div></div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page content -->
+  <div class="abidkhan-container">
+    <h1>Tutorials</h1>
+    <p class="abidkhan-subtitle">
+      Explore hands-on tutorials in IT, Web Development, Data Science, Cloud Computing, Cybersecurity, Graphic Design,
+      Digital Marketing, O-Level, A-Level, Math, Chemistry, Biology, Physics, Computer Science
+    </p>
+
+    <!-- Example grid (replace or inject via abidkhan-tutorials.js) -->
+    <div class="abidkhan-grid" id="abidkhan-tutorialContainer">
+      <div class="abidkhan-card">
+        <img src="https://images.unsplash.com/photo-1526378722370-8ba5f84f0f1b?q=80&w=800&auto=format&fit=crop" alt="Data Science">
+        <h3>Data Science Basics</h3>
+        <p>Start with Python, Pandas, and visualization foundations.</p>
+        <a class="abidkhan-btn" href="#">Start learning</a>
+      </div>
+      <div class="abidkhan-card">
+        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop" alt="Web Dev">
+        <h3>Modern Web Development</h3>
+        <p>HTML, CSS, JS, and responsive design patterns.</p>
+        <a class="abidkhan-btn" href="#">Start learning</a>
       </div>
     </div>
   </div>
-</nav>
 
-
-<div class="abidkhan-container">
-  <h1>Tutorials</h1>
-  <div class="abidkhan-grid" id="abidkhan-tutorialContainer">
-    <!-- Cards injected by abidkhan-tutorials.js -->
-  </div>
-</div>
-</body>
+  <!-- Scripts: place before closing body -->
   <script>
-  // ---------------- NAVBAR HAMBURGER TOGGLE ----------------
-const abidkhanHamburger = document.getElementById('abidkhan-hamburger');
-const abidkhanNavLinks = document.getElementById('abidkhan-nav-links');
+    // Mobile hamburger toggle
+    const abidkhanHamburger = document.getElementById('abidkhan-hamburger');
+    const abidkhanNavLinks = document.getElementById('abidkhan-nav-links');
+    if (abidkhanHamburger && abidkhanNavLinks) {
+      abidkhanHamburger.addEventListener('click', () => {
+        abidkhanNavLinks.classList.toggle('show');
+        abidkhanHamburger.classList.toggle('open');
+      });
+    }
 
-abidkhanHamburger.addEventListener('click', () => {
-  abidkhanNavLinks.classList.toggle('show');
-});
-
-// ---------------- WHATSAPP ALIAS SYSTEM ----------------
-const abidkhanNumberMap = {
-  "1111-1111111": "923497469638",
-  "2222-2222222": "923497469638"
-};
-
-function abidkhanOpenWhatsApp() {
-  const input = document.getElementById('abidkhan-numberInput').value.trim();
-  const actualNumber = abidkhanNumberMap[input] || input;
-  const url = `https://wa.me/${actualNumber.replace(/[^0-9]/g,'')}`;
-  window.open(url, "_blank");
-}
-</script>
+    // WhatsApp alias (keep if you need it on this page)
+    const abidkhanNumberMap = {
+      "1111-1111111": "923497469638",
+      "2222-2222222": "923497469638"
+    };
+    function abidkhanOpenWhatsApp() {
+      const input = document.getElementById('abidkhan-numberInput');
+      if (!input) return;
+      const actualNumber = abidkhanNumberMap[input.value.trim()] || input.value.trim();
+      const url = `https://wa.me/${actualNumber.replace(/[^0-9]/g,'')}`;
+      window.open(url, "_blank");
+    }
+  </script>
+</body>
 </html>
-
-
