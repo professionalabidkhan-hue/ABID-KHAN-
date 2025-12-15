@@ -50,6 +50,26 @@
     .nav-links a:hover {
       color: #4fc3f7;
     }
+    /* Show hamburger on mobile & tablet */
+@media (max-width: 1024px) {
+  .hamburger {
+    display: flex;
+  }
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    background: #0b63d3;
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    padding: 10px;
+    border-radius: 8px;
+  }
+  .nav-links.show {
+    display: flex;
+  }
+}
+
     .hamburger {
       display: none; /* show on mobile later */
     }
@@ -61,20 +81,27 @@
   <img src="https://raw.githubusercontent.com/professionalabidkhan-hue/ABID-KHAN-/main/ABID%20KHAN.png" alt="Abid Khan" class="corner-img">
 
   <!-- Navbar -->
-  <nav>
-    <div class="nav-container">
-      <a href="index.html" class="nav-brand">Abid Khan's E-Learning Hub</a>
-      <div class="hamburger" id="hamburger">
-        <div></div><div></div><div></div>
-      </div>
-      <div class="nav-links" id="nav-links">
-        <a href="index.html">Home</a>
-        <a href="courses.html">Courses</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
-      </div>
+ <nav>
+  <div class="nav-container">
+    <a href="index.html" class="nav-brand">Abid Khan's E-Learning Hub</a>
+
+    <!-- Hamburger with span bars -->
+    <div class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
     </div>
-  </nav>
+
+    <!-- Nav links -->
+    <div class="nav-links" id="nav-links">
+      <a href="index.html">Home</a>
+      <a href="courses.html">Courses</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+</nav>
+
   <header>
     <h2>Web Development Course</h2>
     <!-- Replace with your actual profile picture -->
