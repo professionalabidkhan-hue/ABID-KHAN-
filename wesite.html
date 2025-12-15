@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Courses - Abid Khan's E-Learning Hub</title> 
+  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/professionalabidkhan-hue/ABID-KHAN-/main/ABID%20KHAN.png">
+  <link rel="stylesheet" href="style.css"> <!-- keep your external CSS -->
+  <style>
+    /* Corner Logo */
+    .corner-img {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 2px solid #4fc3f7;
+      box-shadow: 0 0 12px rgba(79,195,247,0.8);
+      z-index: 1000;
+    }
+
+    /* Basic Navbar styling */
+    nav {
+      background: #0f172a;
+      color: #fff;
+      padding: 12px 16px;
+    }
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .nav-brand {
+      font-weight: bold;
+      color: #4fc3f7;
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 16px;
+    }
+    .nav-links a {
+      color: #fff;
+      text-decoration: none;
+      padding: 8px;
+    }
+    .nav-links a:hover {
+      color: #4fc3f7;
+    }
+    .hamburger {
+      display: none; /* show on mobile later */
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Corner Logo -->
+  <img src="https://raw.githubusercontent.com/professionalabidkhan-hue/ABID-KHAN-/main/ABID%20KHAN.png" alt="Abid Khan" class="corner-img">
+
+  <!-- Navbar -->
+  <nav>
+    <div class="nav-container">
+      <a href="index.html" class="nav-brand">Abid Khan's E-Learning Hub</a>
+      <div class="hamburger" id="hamburger">
+        <div></div><div></div><div></div>
+      </div>
+      <div class="nav-links" id="nav-links">
+        <a href="index.html">Home</a>
+        <a href="courses.html">Courses</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+  </nav>
+  <header>
+    <h2>Web Development Course</h2>
+    <!-- Replace with your actual profile picture -->
+    <img src="images/abidkhan.jpg" alt="ABID KHAN">
+  </header>
+
+  <main>
+    <h1>Learn HTML, CSS, JavaScript & Responsive Design</h1>
+    <p>Master front-end development with real-world projects. Classes are conducted online via Zoom, Google Classroom, or Microsoft Teams.</p>
+
+    <div class="grid">
+      <div class="card">
+        <img src="images/html-css.jpg" alt="HTML & CSS">
+        <h3>HTML & CSS Basics</h3>
+        <p>Build strong foundations in web structure and styling.</p>
+      </div>
+      <div class="card">
+        <img src="images/javascript.jpg" alt="JavaScript">
+        <h3>JavaScript Essentials</h3>
+        <p>Learn interactive programming and DOM manipulation.</p>
+      </div>
+      <div class="card">
+        <img src="images/responsive.jpg" alt="Responsive Design">
+        <h3>Responsive Design</h3>
+        <p>Create websites that look great on all devices.</p>
+      </div>
+    </div>
+
+    <section class="fees">
+      <h2>Fee Schedule</h2>
+      <table>
+        <tr>
+          <th>Plan</th>
+          <th>Duration</th>
+          <th>Fee</th>
+          <th>Platform</th>
+        </tr>
+        <tr>
+          <td>Beginner</td>
+          <td>4 Weeks</td>
+          <td>$50</td>
+          <td>Zoom</td>
+        </tr>
+        <tr>
+          <td>Intermediate</td>
+          <td>8 Weeks</td>
+          <td>$90</td>
+          <td>Google Classroom</td>
+        </tr>
+        <tr>
+          <td>Advanced</td>
+          <td>12 Weeks</td>
+          <td>$120</td>
+          <td>Microsoft Teams</td>
+        </tr>
+      </table>
+    </section>
+  </main>
+  <!-- Footer -->
+<footer style="background:#ffffff; padding:30px 20px; text-align:center; box-shadow:0 -4px 12px rgba(0,0,0,0.05);">
+  <h3 style="margin-bottom:12px; color:#111827;">Get in Touch on WhatsApp</h3>
+
+  <!-- WhatsApp Alias Input -->
+  <input type="text" id="footerNumberInput" placeholder="Enter number (e.g. 923111111111)" 
+         style="padding:10px 12px; border-radius:8px; border:1px solid #d1d5db; width:220px; margin-bottom:12px;">
+  
+  <button id="footerWhatsappBtn" style="padding:10px 20px; border-radius:999px; background:#0b63d3; color:#fff; font-weight:600; border:none; cursor:pointer; transition:0.3s;">
+    Message on WhatsApp
+  </button>
+
+  <!-- Footer text -->
+  <p style="margin-top:16px; color:#6b7280;">
+    © <span id="year"></span> Abid Khan's E-Learning Hub
+  </p>
+</footer>
+
+<script>
+  // Hamburger toggle
+  const hamburger = document.getElementById("hamburger");
+  const navLinks = document.getElementById("nav-links");
+  if (hamburger && navLinks) {
+    hamburger.addEventListener("click", () => {
+      navLinks.classList.toggle("show");
+      hamburger.classList.toggle("open");
+    });
+  }
+
+  // Dynamic year
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  // WhatsApp button functionality
+  const whatsappBtn = document.getElementById("footerWhatsappBtn");
+  const numberInput = document.getElementById("footerNumberInput");
+
+  whatsappBtn.addEventListener("click", () => {
+    const number = numberInput.value.trim();
+    if (number) {
+      // Format: https://wa.me/<number>
+      window.open(`https://wa.me/${number}`, "_blank");
+    } else {
+      alert("Please enter a valid WhatsApp number.");
+    }
+  });
+</script>
+</body>
+</html>
+
+</body>
+</html>
