@@ -451,56 +451,53 @@
    <button class="btn">Enroll Now</button><button class="btn" onclick="window.location.href='https://professionalabidkhan-hue.github.io/ABID-KHAN-/SpecialMath.html'">Enroll Now</button>
 </article>
 </main>
-<!-- FOOTER -->
-<footer style="background:#ffffff; padding:30px 20px; text-align:center; box-shadow:0 -4px 12px rgba(0,0,0,0.05);">
-  <h3 style="margin-bottom:12px; color:#111827;">Get in Touch on WhatsApp</h3>
-
-  <!-- WhatsApp Alias Input -->
-  <input type="text" id="footerNumberInput" placeholder="Enter number (e.g. 1111-1111111)" 
-         style="padding:10px 12px; border-radius:8px; border:1px solid #d1d5db; width:220px; margin-bottom:12px;">
-  <button id="footerWhatsappBtn" style="padding:10px 20px; border-radius:999px; background:#0b63d3; color:#fff; font-weight:600; border:none; cursor:pointer; transition:0.3s;">
-    Message on WhatsApp
-  </button>
 <div id="footer-placeholder"></div>
 <script>
   fetch("footer.html")
     .then(response => response.text())
     .then(data => {
       document.getElementById("footer-placeholder").innerHTML = data;
+      // Attach footer script after footer loads
+      const footerScript = document.createElement("script");
+      footerScript.src = "footer.js";
+      document.body.appendChild(footerScript);
     });
+
+// Attach nav script separately
+  const navScript = document.createElement("script");
+  navScript.src = "nav.js";
+  document.body.appendChild(navScript);
 </script>
-
- 
-
 <script>
-   // Highlight based on URL
-  const current = window.location.pathname.split("/").pop();
-  document.querySelectorAll(".nav-links a").forEach(link => {
-    if (link.getAttribute("href") === current) {
-      link.classList.add("active");
-    }
-    link.addEventListener("click", e => {
-      document.querySelectorAll(".nav-links a").forEach(a => a.classList.remove("active"));
-      e.currentTarget.classList.add("active");
-    });
+  // Highlight active nav link based on URL
+const current = window.location.pathname.split("/").pop() || "index.html";
+document.querySelectorAll(".nav-links a").forEach(link => {
+  if (link.getAttribute("href") === current) {
+    link.classList.add("active");
+  }
+  link.addEventListener("click", e => {
+    document.querySelectorAll(".nav-links a").forEach(a => a.classList.remove("active"));
+    e.currentTarget.classList.add("active");
   });
+});
 
-  // Hamburger toggle
-  const hamburger = document.getElementById("hamburger");
-  const navLinks = document.getElementById("nav-links");
-  if (hamburger && navLinks) {
-    hamburger.addEventListener("click", () => {
-      navLinks.classList.toggle("show");
-      hamburger.classList.toggle("open");
-    });
-  }
+// Hamburger toggle
+const hamburger = document.getElementById("hamburger");
+const navLinks = document.getElementById("nav-links");
+if (hamburger && navLinks) {
+  hamburger.addEventListener("click", () => {
+    navLinks.classList.toggle("show");
+    hamburger.classList.toggle("open");
+  });
+}
 
-  // Dark mode toggle
-  const themeToggle = document.getElementById("themeToggle");
-  if (themeToggle) {
-    themeToggle.addEventListener("click", () => {
-      document.body.classList.toggle("dark");
-    });
-  }
+// Dark mode toggle
+const themeToggle = document.getElementById("themeToggle");
+if (themeToggle) {
+  themeToggle.addEventListener("click", () => {
+    document.body.classList.toggle("dark");
+  });
+}
+
 </script>
 </html>
