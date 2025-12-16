@@ -1,242 +1,250 @@
-body{
- padding-left:50px;
- padding-right:50px;
-}
 :root {
-    --accent: #0b63d3;
-    --muted: #6b7280;
-    --bg: #f7fafc;
-    --card: #ffffff;
-    --radius: 12px;
-    --max-width: 1200px;
-    --gap: 20px;
-    font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  }
-
-  .corner-img {
-    position: fixed;
-    bottom: 16px;
-    left: 16px;
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    object-fit: cover;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    z-index: 9999;
-  }
-
-  html, body {
-    height:100%; margin:0; background:var(--bg); color:#111827; scroll-behavior:smooth;
-  }
-
-  .container {
-    max-width:var(--max-width); margin:36px auto; padding:24px;
-  }
-.search {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    margin: 30px auto;
-    max-width: 600px;
+  --accent: #0b63d3;
+  --muted: #6b7280;
+  --bg: #f7fafc;
+  --card: #ffffff;
+  --radius: 12px;
+  --max-width: 1200px;
+  --gap: 20px;
+  font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
 }
 
-.search input[type="search"] {
-    flex: 1;
-    padding: 12px 15px;
-    font-size: 1rem;
-    border: 2px solid #1a73e8;
-    border-radius: 8px;
-    outline: none;
-    transition: 0.3s;
+html, body {
+  height: 100%;
+  margin: 0;
+  background: var(--bg);
+  color: #111827;
+  scroll-behavior: smooth;
+  padding: 0;
 }
 
-.search input[type="search"]:focus {
-    border-color: #1558b0;
-    box-shadow: 0 0 5px rgba(26, 115, 232, 0.4);
+/* Corner image */
+.corner-img {
+  position: fixed;
+  bottom: 16px;
+  left: 16px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  z-index: 9999;
 }
 
-.search button {
-    padding: 12px 20px;
-    background: #1a73e8;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.search button:hover {
-    background: #1558b0;
-}
-
-  /* Header / Navbar */
-  .abid-header {display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;}
-  .abid-nav ul {display:flex; gap:16px; list-style:none; padding:0; margin:0; flex-wrap:wrap;}
-  .abid-nav a {
-    text-decoration:none; color:var(--muted);
-    padding:8px 14px; border-radius:8px; font-weight:600;
-    transition: all 0.3s;
-    position: relative;
-  }
-  .abid-nav a.active, .abid-nav a:hover {background:var(--accent); color:#fff;}
-  .abid-nav a::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -4px;
-    width: 0%;
-    height: 2px;
-    background: var(--accent);
-    transition: width 0.3s ease;
-  }
-  .abid-nav a:hover::after {width: 100%;}
-
-  .abid-actions {display:flex; gap:10px; align-items:center; flex-wrap:wrap;}
-  .btn {background:var(--accent); color:#fff; padding:10px 16px; border-radius:12px; text-decoration:none; font-weight:600; transition: all 0.3s;}
-  .btn:hover {background:#094ca2;}
-  .btn.secondary {background:#eef2ff; color:var(--accent); border:1px solid rgba(11,99,211,0.15);}
-  .btn.secondary:hover {background:#d6e4ff;}
-
-  /* Hamburger */
-  .abid-hamburger {
-    display: none;
-    flex-direction: column;
-    justify-content: space-around;
-    width: 30px;
-    height: 24px;
-    background: none;
-    border: none;
-    cursor: pointer;
-  }
-  .abid-hamburger span {
-    display: block;
-    width: 100%;
-    height: 3px;
-    background: #111827;
-    transition: all 0.3s ease;
-  }
-  .abid-hamburger.open span:nth-child(1) {transform: rotate(45deg) translate(5px, 5px);}
-  .abid-hamburger.open span:nth-child(2) {opacity: 0;}
-  .abid-hamburger.open span:nth-child(3) {transform: rotate(-45deg) translate(6px, -6px);}
-
-  /* Mega menu */
-  .mega-menu .mega-menu-content {
-    display: none;
-    position: absolute;
-    left: 0;
-    top: 100%;
-    width: 800px;
-    background: linear-gradient(135deg, #fff, #f9f9f9);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    padding: 20px;
-    border-radius: 8px;
-    opacity: 0;
-    transform: translateY(10px);
-    transition: all 0.3s ease;
-  }
-  .mega-menu:hover .mega-menu-content {
-    display: block;
-    opacity: 1;
-    transform: translateY(0);
-  }
-  .mega-menu-row {display: flex; justify-content: space-between;}
-  .mega-menu-col {width: 30%;}
-  .mega-menu-col h4 {
-    margin-bottom: 10px; font-size: 16px; border-bottom: 1px solid #ddd;
-  }
-  .mega-menu-col ul {list-style: none; padding: 0;}
-  .mega-menu-col ul li a {
-    display: block; padding: 5px 0; color: #333;
-  }
-  .mega-menu-col ul li a:hover {color: var(--accent);}
-
-  /* Cards */
-  .abid-card {background:var(--card); padding:20px; border-radius:var(--radius); box-shadow:0 6px 20px rgba(0,0,0,0.03); transition: all 0.3s;}
-  .abid-card:hover {transform: translateY(-5px); box-shadow:0 12px 28px rgba(0,0,0,0.08);}
-  .abid-card h3 {margin:0 0 10px 0; font-size:1.1rem;}
-  .abid-card p {margin:0; color:var(--muted); font-size:0.95rem;}
-  .abid-card small {display:block; margin-top:12px; color:var(--muted);}
-
-  /* Layout */
-  .section {margin-top:40px;}
-  .grid {display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:20px;}
-  .two-col {display:grid; grid-template-columns:1fr 420px; gap:20px; align-items:start;}
-
-  /* Forms */
-  form input, form textarea {width:100%; padding:12px; border-radius:10px; border:1px solid #e6e9ef; margin-top:8px;}
-  form button {margin-top:12px; padding:12px 18px; border-radius:10px; border:0; background:var(--accent); color:#fff; font-weight:700; cursor:pointer;}
-  form button:hover {background:#094ca2;}
-
-  /* Footer */
-  .abid-footer {margin-top:36px; padding:18px 0; color:var(--muted); font-size:0.9rem; text-align:center;}
-  .abid-footer::after {
-    content: "Crafted by Abid Khan — Distinctive Learning Hub";
-    display: block;
-    margin-top: 8px;
-    font-style: italic;
-    color: var(--accent);
-  }
-
-  /* Responsive */
-  @media (max-width:920px){
-    .hero, .two-col {flex-direction:column;}
-    .corner-img {width:80px; height:80px;}
-    .mega-menu .mega-menu-content {
-      position: static;
-      width: 100%;
-      box-shadow: none;
-      background: #fff;
-      opacity: 1;
-      transform: none;
-    }
-    .mega-menu-row {flex-direction: column;}
-    .mega-menu-col {width: 100%; margin-bottom: 20px;}
-    .abid-hamburger {display: flex;}
-    .abid-nav ul {flex-direction: column;}
-  }
-.footer {
-  background: rgba(255,255,255,0.1);
-  backdrop-filter: blur(12px);
-  padding: 30px 20px;
-  text-align: center;
-  box-shadow: 0 -4px 12px rgba(0,0,0,0.25);
-  border-top: 1px solid rgba(255,255,255,0.2);
-  color: #fff;
-}
-
-.footer h3 {
-  margin-bottom: 12px;
-  color: #4fc3f7;
-  text-shadow: 0 0 6px rgba(79,195,247,0.8);
-}
-
-.footer input {
-  padding: 10px 12px;
-  border-radius: 8px;
-  border: 1px solid #d1d5db;
-  width: 220px;
-  margin-bottom: 12px;
-}
-
-.footer button {
+/* Header / Navbar */
+.abid-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  position: sticky;
+  top: 0;
+  background: var(--card);
   padding: 10px 20px;
-  border-radius: 999px;
-  background: #0b63d3;
-  color: #fff;
+  z-index: 1000;
+}
+
+.abid-nav ul {
+  display: flex;
+  gap: 16px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.abid-nav a {
+  text-decoration: none;
+  color: var(--muted);
+  padding: 8px 14px;
+  border-radius: 8px;
   font-weight: 600;
+  transition: all 0.3s;
+  position: relative;
+}
+
+.abid-nav a.active,
+.abid-nav a:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
+.abid-nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0%;
+  height: 2px;
+  background: var(--accent);
+  transition: width 0.3s ease;
+}
+
+.abid-nav a:hover::after {
+  width: 100%;
+}
+
+/* Actions */
+.abid-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.btn {
+  background: var(--accent);
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.btn:hover { background: #094ca2; }
+.btn.secondary {
+  background: #eef2ff;
+  color: var(--accent);
+  border: 1px solid rgba(11,99,211,0.15);
+}
+.btn.secondary:hover { background: #d6e4ff; }
+
+/* Hamburger */
+.abid-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 30px;
+  height: 24px;
+  background: none;
   border: none;
   cursor: pointer;
-  transition: 0.3s;
+}
+.abid-hamburger span {
+  display: block;
+  width: 100%;
+  height: 3px;
+  background: #111827;
+  transition: all 0.3s ease;
+}
+.abid-hamburger.open span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+.abid-hamburger.open span:nth-child(2) { opacity: 0; }
+.abid-hamburger.open span:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
 }
 
-.footer button:hover {
-  background: #4fc3f7;
-  transform: scale(1.05);
+/* Mega menu */
+.mega-menu { position: relative; }
+.mega-menu .mega-menu-content {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 100%;
+  width: 800px;
+  background: linear-gradient(135deg, #fff, #f9f9f9);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  padding: 20px;
+  border-radius: 8px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+}
+.mega-menu:hover .mega-menu-content {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+.mega-menu-row { display: flex; justify-content: space-between; }
+.mega-menu-col { width: 30%; }
+.mega-menu-col h4 {
+  margin-bottom: 10px;
+  font-size: 16px;
+  border-bottom: 1px solid #ddd;
+}
+.mega-menu-col ul { list-style: none; padding: 0; }
+.mega-menu-col ul li a {
+  display: block;
+  padding: 5px 0;
+  color: #333;
+}
+.mega-menu-col ul li a:hover { color: var(--accent); }
+
+/* Cards */
+.abid-card {
+  background: var(--card);
+  padding: 20px;
+  border-radius: var(--radius);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.03);
+  transition: all 0.3s;
+}
+.abid-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+}
+.abid-card h3 { margin: 0 0 10px 0; font-size: 1.1rem; }
+.abid-card p { margin: 0; color: var(--muted); font-size: 0.95rem; }
+
+/* Footer */
+.abid-footer {
+  margin-top: 36px;
+  padding: 18px 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  text-align: center;
+}
+.abid-footer::after {
+  content: "Crafted by Abid Khan — Distinctive Learning Hub";
+  display: block;
+  margin-top: 8px;
+  font-style: italic;
+  color: var(--accent);
 }
 
-.footer p {
-  margin-top: 16px;
-  color: #e0e0e0;
+/* Floating WhatsApp Button */
+.whatsapp-float {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #25d366;
+  border-radius: 50%;
+  padding: 12px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  z-index: 9999;
+  transition: transform 0.2s ease-in-out;
+}
+.whatsapp-float img {
+  width: 40px;
+  height: 40px;
+}
+.whatsapp-float:hover { transform: scale(1.1); }
+
+/* Responsive */
+@media (max-width: 920px) {
+  .corner-img { width: 80px; height: 80px; }
+  .mega-menu .mega-menu-content {
+    position: static;
+    width: 100%;
+    box-shadow: none;
+    background: #fff;
+    opacity: 1;
+    transform: none;
+  }
+  .mega-menu-row { flex-direction: column; }
+  .mega-menu-col { width: 100%; margin-bottom: 20px; }
+  .abid-hamburger { display: flex; }
+  .abid-nav ul {
+    display: none;
+    flex-direction: column;
+    background: #fff;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+  .abid-nav ul.show { display: flex; }
 }
