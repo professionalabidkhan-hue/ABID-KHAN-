@@ -40,60 +40,126 @@
       box-shadow:0 0 12px rgba(79,195,247,0.8);
       z-index: 1000;
     }
+ nav {
+      background: #333;
+      color: #fff;
+      padding: 10px 20px;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-brand {
+      font-size: 18px;
+      font-weight: bold;
+      color: #fff;
+      text-decoration: none;
+    }
+
+    /* Hamburger bars */
+    .hamburger {
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .hamburger div {
+      width: 25px;
+      height: 3px;
+      background: #fff;
+      margin: 4px 0;
+      transition: all 0.4s ease;
+      border-radius: 2px;
+    }
+
+    /* Hamburger open → X */
+    .hamburger.open div:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    .hamburger.open div:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger.open div:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
 
     /* ------------------------------
-       NAVBAR
+       NAV LINKS (MOBILE COLLAPSE)
     ------------------------------ */
-   /* Nav links hidden by default on mobile */
-.nav-links {
-  max-height: 0;
-  overflow: hidden;
-  opacity: 0;
-  transform: translateY(-20px);
-  flex-direction: column;
-  background: #444;
-  position: absolute;
-  top: 60px;
-  right: 20px;
-  width: 200px;
-  padding: 0;
-  border-radius: 4px;
-  transition: max-height 0.4s ease, opacity 0.4s ease, transform 0.4s ease, padding 0.4s ease;
-}
+    .nav-links {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(-20px);
+      flex-direction: column;
+      background: #444;
+      position: absolute;
+      top: 60px;
+      right: 20px;
+      width: 200px;
+      padding: 0;
+      border-radius: 4px;
+      transition: max-height 0.4s ease, opacity 0.4s ease,
+                  transform 0.4s ease, padding 0.4s ease;
+    }
 
-.nav-links a {
-  color: #fff;
-  text-decoration: none;
-  padding: 10px;
-  display: block;
-  opacity: 0;
-  transform: translateY(-10px) scale(0.95);
-  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); /* bounce easing */
-}
+    .nav-links a {
+      color: #fff;
+      text-decoration: none;
+      padding: 10px;
+      display: block;
+      opacity: 0;
+      transform: translateY(-10px) scale(0.95);
+      transition: opacity 0.5s ease,
+                  transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
 
-.nav-links a:hover {
-  background: #555;
-}
+    .nav-links a:hover {
+      background: #555;
+    }
 
-/* Show nav links with fade + slide-down */
-.nav-links.show {
-  max-height: 500px;
-  opacity: 1;
-  transform: translateY(0);
-  padding: 10px;
-}
+    /* Show nav links with fade + slide-down */
+    .nav-links.show {
+      max-height: 500px;
+      opacity: 1;
+      transform: translateY(0);
+      padding: 10px;
+    }
 
-/* Staggered + bounce animation for each link */
-.nav-links.show a {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-}
+    /* Staggered + bounce animation for each link */
+    .nav-links.show a {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    .nav-links.show a:nth-child(1) { transition-delay: 0.1s; }
+    .nav-links.show a:nth-child(2) { transition-delay: 0.2s; }
+    .nav-links.show a:nth-child(3) { transition-delay: 0.3s; }
+    .nav-links.show a:nth-child(4) { transition-delay: 0.4s; }
 
-.nav-links.show a:nth-child(1) { transition-delay: 0.1s; }
-.nav-links.show a:nth-child(2) { transition-delay: 0.2s; }
-.nav-links.show a:nth-child(3) { transition-delay: 0.3s; }
-.nav-links.show a:nth-child(4) { transition-delay: 0.4s; }
-/* Add more delays if you have more links */
+    /* ------------------------------
+       DESKTOP VIEW
+    ------------------------------ */
+    @media (min-width: 768px) {
+      .hamburger { display: none; }
+      .nav-links {
+        position: static;
+        max-height: none;
+        opacity: 1;
+        transform: none;
+        flex-direction: row;
+        background: transparent;
+        padding: 0;
+      }
+      .nav-links a {
+        opacity: 1;
+        transform: none;
+        transition: none;
+        margin-left: 20px;
+      }
+    }
 
     /* ------------------------------
        MAIN CONTENT
@@ -175,21 +241,21 @@
 <!-- Corner Logo -->
 <img src="https://raw.githubusercontent.com/professionalabidkhan-hue/ABID-KHAN-/main/ABID KHAN.png" alt="Abid Khan" class="corner-img">
 
-<!-- Navbar -->
-<nav>
-  <div class="nav-container">
-    <a href="index.html" class="nav-brand">Abid Khan's E-Learning Hub</a>
-    <div class="hamburger" id="hamburger">
-      <div></div><div></div><div></div>
+  <!-- Navbar -->
+  <nav role="navigation">
+    <div class="nav-container">
+      <a href="index.html" class="nav-brand">Abid Khan's E-Learning Hub</a>
+      <div class="hamburger" id="hamburger" aria-expanded="false" aria-label="Menu">
+        <div></div><div></div><div></div>
+      </div>
+      <div class="nav-links" id="nav-links">
+        <a href="index.html">Home</a>
+        <a href="courses.html">Courses</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </div>
     </div>
-    <div class="nav-links" id="nav-links">
-      <a href="index.html">Home</a>
-      <a href="courses.html">Courses</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
-    </div>
-  </div>
-</nav>
+  </nav>
 
 <!-- Main Content -->
 <main>
@@ -468,38 +534,32 @@
     © <span id="year"></span> Abid Khan's E-Learning Hub | Contact on WhatsApp: 
   </p>
 </footer>
-
-
 </body>
 <script>
-  // Hamburger toggle
-  const hamburger = document.getElementById("hamburger");
-  const navLinks = document.getElementById("nav-links");
+    // Hamburger toggle
+    const hamburger = document.getElementById("hamburger");
+    const navLinks = document.getElementById("nav-links");
 
-  if (hamburger && navLinks) {
-    hamburger.addEventListener("click", () => {
-      // Toggle menu visibility
-      navLinks.classList.toggle("show");
+    if (hamburger && navLinks) {
+      hamburger.addEventListener("click", () => {
+        navLinks.classList.toggle("show");
+        hamburger.classList.toggle("open");
 
-      // Toggle hamburger animation (turns into X)
-      hamburger.classList.toggle("open");
+        // Toggle aria-expanded for accessibility
+        const expanded = hamburger.classList.contains("open");
+        hamburger.setAttribute("aria-expanded", expanded);
 
-      // Optional: reset transition delays when closing
-      if (!navLinks.classList.contains("show")) {
-        // Remove transition delays so links hide instantly
-        navLinks.querySelectorAll("a").forEach(link => {
-          link.style.transitionDelay = "0s";
-        });
-      } else {
-        // Restore stagger delays when opening
-        navLinks.querySelectorAll("a").forEach((link, index) => {
-          link.style.transitionDelay = `${(index + 1) * 0.1}s`;
-        });
-      }
-    });
-  }
-</script>
-
-
-
+        // Reset transition delays when closing
+        if (!navLinks.classList.contains("show")) {
+          navLinks.querySelectorAll("a").forEach(link => {
+            link.style.transitionDelay = "0s";
+          });
+        } else {
+          navLinks.querySelectorAll("a").forEach((link, index) => {
+            link.style.transitionDelay = `${(index + 1) * 0.1}s`;
+          });
+        }
+      });
+    }
+  </script>
 </html>
