@@ -328,65 +328,73 @@ nav {
   </main>
 
   <!-- Footer -->
-  <footer id="footer" class="footer">
-    <h3>Get in Touch on WhatsApp</h3>
-    <input type="text" id="footerNumberInput" placeholder="Enter number (e.g. 1111-1111111)">
-    <button id="footerWhatsappBtn">Message on WhatsApp</button>
-    <p>© <span id="year"></span> Abid Khan's E-Learning Hub | Contact on WhatsApp: 1111-1111111, 2222-2222222</p>
-  </footer>
+  <!-- Footer text with alias numbers -->
+  <p style="margin-top:16px; color:#6b7280;">
+    © <span id="year"></span> Abid Khan's E-Learning Hub | Contact on WhatsApp: 1111-1111111, 2222-2222222
+  </p>
+</footer>
 
-  <!-- Scripts -->
-  <script>
-  // WhatsApp alias mapping
-  const footerNumberMap = {
-    "1111-1111111": "923497469638",
-    "2222-2222222": "923497469638"
-  };
+<script>
+  // --- Branding Lock ---
+  const siteTitle = document.querySelector('.nav-title')?.textContent.trim();
+  const siteLogo = document.querySelector('.nav-logo')?.getAttribute('src');
 
-  document.getElementById('footerWhatsappBtn').addEventListener('click', function() {
-    const input = document.getElementById('footerNumberInput').value.trim();
-    const actualNumber = footerNumberMap[input] || input;
-    const cleaned = actualNumber.replace(/[^0-9]/g, '');
-    const message = encodeURIComponent("Abid Khan");
-    const url = `https://api.whatsapp.com/send?phone=${cleaned}&text=${message}`;
-    window.open(url, "_blank");
-  });
+  const allowedTitle = "Abid Khan's E-Learning Hub";
+  const allowedLogo = "https://raw.githubusercontent.com/professionalabidkhan-hue/ABID-KHAN-/main/ABID%20KHAN.png";
 
-  // Footer year update
-  document.getElementById("year").textContent = new Date().getFullYear();
+  if (siteTitle === allowedTitle && siteLogo === allowedLogo) {
+    // WhatsApp button functionality
+    const footerNumberMap = {
+      "1111-1111111": "923497469638",
+      "2222-2222222": "923497469638"
+    };
 
-  // Hamburger toggle
-  const hamburger = document.getElementById("hamburger");
-  const navLinks = document.getElementById("navLinks");
-  if (hamburger && navLinks) {
-    hamburger.addEventListener("click", () => {
-      navLinks.classList.toggle("show");
-      hamburger.classList.toggle("open");
+    document.getElementById('footerWhatsappBtn').addEventListener('click', function() {
+      const input = document.getElementById('footerNumberInput').value.trim();
+      const actualNumber = footerNumberMap[input] || input;
+      const cleaned = actualNumber.replace(/[^0-9]/g, '');
+      const message = encodeURIComponent("Assalam O Alaikum, I am reaching out to express my interest in IELTS Course offered by Abid Khan's E-Learning Hub.");
+      const url = `https://api.whatsapp.com/send?phone=${cleaned}&text=${message}`;
+      window.open(url, "_blank");
     });
-  }
 
-  // Dynamic unique content
-  const data = {
-    mythFact: [
-      "Myth: Big words guarantee high bands. Fact: Clear, precise language scores higher.",
-      "Myth: Memorized essays work. Fact: Examiners detect templates; originality matters more."
-    ],
-    dailyTip: [
-      "Predict topic vocabulary before Listening Section 3.",
-      "Separate author’s claim from your knowledge in Reading TFNG."
-    ],
-    bandBreakdown: [
-      "Band 9 Writing: precise thesis, logical arguments, varied cohesive devices, error-free grammar."
-    ],
-    weeklyChallenge: [
-      "Write a 250-word essay in 30 minutes, then self-check cohesion."
-    ]
-  };
-  function pickRandom(arr){return arr[Math.floor(Math.random()*arr.length)];}
-  ["mythFact","dailyTip","bandBreakdown","weeklyChallenge"].forEach(id=>{
-    const el=document.getElementById(id);
-    if(el) el.textContent=pickRandom(data[id]);
-  });
-  </script>
+    // Footer year update
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Highlight active nav link
+    const current = window.location.pathname.split("/").pop();
+    document.querySelectorAll(".nav-links a").forEach(link => {
+      if (link.getAttribute("href") === current) {
+        link.classList.add("active");
+      }
+      link.addEventListener("click", e => {
+        document.querySelectorAll(".nav-links a").forEach(a => a.classList.remove("active"));
+        e.currentTarget.classList.add("active");
+      });
+    });
+
+    // Hamburger toggle
+    const hamburger = document.getElementById("hamburger");
+    const navLinks = document.getElementById("nav-links");
+    if (hamburger && navLinks) {
+      hamburger.addEventListener("click", () => {
+        navLinks.classList.toggle("show");
+        hamburger.classList.toggle("open");
+      });
+    }
+
+    // Dark mode toggle
+    const themeToggle = document.getElementById("themeToggle");
+    if (themeToggle) {
+      themeToggle.addEventListener("click", () => {
+        document.body.classList.toggle("dark");
+      });
+    }
+
+  } else {
+    console.error("⚠️ Script blocked: Unauthorized site name or logo detected.");
+    alert("This script is locked to Abid Khan's E-Learning Hub and cannot run elsewhere.");
+  }
+</script>
 </body>
 </html>
