@@ -166,7 +166,51 @@
     display: block;
   }
 }
+/* Unified blur-glass footer */
+.footer {
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(12px);
+  padding: 30px 20px;
+  text-align: center;
+  box-shadow: 0 -4px 12px rgba(0,0,0,0.25);
+  border-top: 1px solid rgba(255,255,255,0.2);
+  color: #fff;
+}
 
+.footer h3 {
+  margin-bottom: 12px;
+  color: #4fc3f7;
+  text-shadow: 0 0 6px rgba(79,195,247,0.8);
+}
+
+.footer input {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  width: 220px;
+  margin-bottom: 12px;
+}
+
+.footer button {
+  padding: 10px 20px;
+  border-radius: 999px;
+  background: #0b63d3;
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.footer button:hover {
+  background: #4fc3f7;
+  transform: scale(1.05);
+}
+
+.footer p {
+  margin-top: 16px;
+  color: #e0e0e0;
+}
   </style>
 </head>
 <body>
@@ -211,25 +255,22 @@
     <button class="nav-toggle" id="navToggle">&#9776;</button>
   </nav>
 </header>
-
 <!-- FOOTER -->
-<footer style="background:#ffffff; padding:30px 20px; text-align:center; box-shadow:0 -4px 12px rgba(0,0,0,0.05);">
-  <h3 style="margin-bottom:12px; color:#111827;">Get in Touch on WhatsApp</h3>
+<footer class="footer">
+  <h3>Get in Touch on WhatsApp</h3>
 
   <!-- WhatsApp Alias Input -->
-  <input type="text" id="footerNumberInput" placeholder="Enter alias (e.g. 1111-1111111)" 
-         style="padding:10px 12px; border-radius:8px; border:1px solid #d1d5db; width:220px; margin-bottom:12px;">
+  <input type="text" id="footerNumberInput" placeholder="Enter alias (e.g. 1111-1111111)">
   
-  <button id="footerWhatsappBtn" style="padding:10px 20px; border-radius:999px; background:#0b63d3; color:#fff; font-weight:600; border:none; cursor:pointer; transition:0.3s;">
+  <button id="footerWhatsappBtn">
     Message on WhatsApp
   </button>
 
   <!-- Footer text with alias numbers -->
-  <p style="margin-top:16px; color:#6b7280;">
+  <p>
     © <span id="year"></span> Abid Khan's E-Learning Hub | Contact on WhatsApp: 1111-1111111, 2222-2222222
   </p>
 </footer>
-
 <script>
   // ✅ All aliases point to your single WhatsApp number
   const fixedWhatsAppNumber = "923497469638"; // Your actual WhatsApp number
@@ -258,8 +299,6 @@
   // ✅ Auto-update footer year
   document.getElementById("year").textContent = new Date().getFullYear();
 </script>
-
-
 
 
 </body>
