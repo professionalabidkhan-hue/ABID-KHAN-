@@ -206,7 +206,7 @@
       const input = document.getElementById('footerNumberInput').value.trim();
       const actualNumber = footerNumberMap[input] || input;
       const cleaned = actualNumber.replace(/[^0-9]/g, '');
-      const message = encodeURIComponent("Assalam O Alaikum, I am reaching out to express my interest in the Website Designing & Development course offered by Abid Khan's E-Learning Hub.");
+      const message = encodeURIComponent("WelCome, I am reaching out to express my interest in the Website Designing & Development course offered by Abid Khan's E-Learning Hub.");
       const url = `https://api.whatsapp.com/send?phone=${cleaned}&text=${message}`;
       window.open(url, "_blank");
     });
