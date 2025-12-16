@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Courses - Abid Khan's E-Learning Hub</title> 
-<link rel="icon" type="image/png" href="https://raw.githubusercontent.com/professionalabidkhan-hue/ABID-KHAN-/main/ABID%20KHAN.png">
-<!-- keep your CSS exactly as you wrote -->
-<style>
-  * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Abid Khan's E-Learning Hub</title>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif; }
 
     body {
       background: url("https://raw.githubusercontent.com/professionalabidkhan-hue/ABID-KHAN-/main/ABID%20KHAN.png") center/cover no-repeat fixed;
@@ -25,138 +23,75 @@
     }
 
     /* ------------------------------
-       CORNER LOGO
+       DASHBOARD PROFILE IMAGE
+    ------------------------------ */
+    .abidkhan-profile-img {
+      height: 80px;
+      width: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #4fc3f7;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+      background: linear-gradient(145deg, #ffffff 0%, #e6e6e6 100%);
+      position: relative;
+    }
+    .abidkhan-profile-img::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      height: 100%; width: 100%;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 60%);
+      pointer-events: none;
+    }
+
+    /* ------------------------------
+       CORNER LOGO (fixed top-left)
     ------------------------------ */
     .corner-img {
       position: fixed;
-      top:20px;
-      left:20px;
-      width:60px;
-      height:60px;
-      border-radius:50%;
-      border:2px solid #4fc3f7;
-      box-shadow:0 0 12px rgba(79,195,247,0.8);
+      top: 20px;
+      left: 20px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 2px solid #4fc3f7;
+      box-shadow: 0 0 12px rgba(79,195,247,0.8);
       z-index: 1000;
-    }
- nav {
-      background: #333;
-      color: #fff;
-      padding: 10px 20px;
+      object-fit: cover;
     }
 
-    .nav-container {
+    /* ------------------------------
+       NAVBAR
+    ------------------------------ */
+    .abidkhan-navbar {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(10px);
+      padding: 12px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
 
-    .nav-brand {
-      font-size: 18px;
-      font-weight: bold;
-      color: #fff;
+    .abidkhan-nav-brand {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #4fc3f7;
       text-decoration: none;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.3);
     }
 
-    /* Hamburger bars */
-    .hamburger {
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-    .hamburger div {
-      width: 25px;
-      height: 3px;
-      background: #fff;
-      margin: 4px 0;
-      transition: all 0.4s ease;
-      border-radius: 2px;
-    }
-
-    /* Hamburger open → X */
-    .hamburger.open div:nth-child(1) {
-      transform: rotate(45deg) translate(5px, 5px);
-    }
-    .hamburger.open div:nth-child(2) {
-      opacity: 0;
-    }
-    .hamburger.open div:nth-child(3) {
-      transform: rotate(-45deg) translate(5px, -5px);
-    }
-
-    /* ------------------------------
-       NAV LINKS (MOBILE COLLAPSE)
-    ------------------------------ */
-    .nav-links {
-      max-height: 0;
-      overflow: hidden;
-      opacity: 0;
-      transform: translateY(-20px);
-      flex-direction: column;
-      background: #444;
-      position: absolute;
-      top: 60px;
-      right: 20px;
-      width: 200px;
-      padding: 0;
-      border-radius: 4px;
-      transition: max-height 0.4s ease, opacity 0.4s ease,
-                  transform 0.4s ease, padding 0.4s ease;
-    }
-
-    .nav-links a {
-      color: #fff;
-      text-decoration: none;
-      padding: 10px;
-      display: block;
-      opacity: 0;
-      transform: translateY(-10px) scale(0.95);
-      transition: opacity 0.5s ease,
-                  transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    .nav-links a:hover {
-      background: #555;
-    }
-
-    /* Show nav links with fade + slide-down */
-    .nav-links.show {
-      max-height: 500px;
-      opacity: 1;
-      transform: translateY(0);
-      padding: 10px;
-    }
-
-    /* Staggered + bounce animation for each link */
-    .nav-links.show a {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
-    .nav-links.show a:nth-child(1) { transition-delay: 0.1s; }
-    .nav-links.show a:nth-child(2) { transition-delay: 0.2s; }
-    .nav-links.show a:nth-child(3) { transition-delay: 0.3s; }
-    .nav-links.show a:nth-child(4) { transition-delay: 0.4s; }
-
-    /* ------------------------------
-       DESKTOP VIEW
-    ------------------------------ */
-    @media (min-width: 768px) {
-      .hamburger { display: none; }
-      .nav-links {
-        position: static;
-        max-height: none;
-        opacity: 1;
-        transform: none;
-        flex-direction: row;
-        background: transparent;
-        padding: 0;
-      }
-      .nav-links a {
-        opacity: 1;
-        transform: none;
-        transition: none;
-        margin-left: 20px;
-      }
+    /* Navbar logo on the right */
+    .abidkhan-corner-img {
+      height: 50px;
+      width: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #4fc3f7;
+      box-shadow: 0 0 8px rgba(79,195,247,0.6);
     }
 
     /* ------------------------------
@@ -182,7 +117,6 @@
       flex-direction: column;
       justify-content: space-between;
     }
-   
     .course:hover { transform:translateY(-8px); box-shadow:0 12px 35px rgba(0,0,0,0.45); border-color:#4fc3f7; }
     .course h3 { margin-bottom:10px; font-size:1.2rem; }
     .course p { margin-bottom:15px; font-size:0.95rem; color:#e0e0e0; }
@@ -195,58 +129,6 @@
       font-weight:600;
       cursor:pointer;
       transition:0.3s;
-    }
-  
-     .abidkhan-corner-img,
-    .abidkhan-profile-img {
-      height: 60px;
-      width: 60px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid #0b63d3;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-      background: linear-gradient(145deg, #ffffff 0%, #e6e6e6 100%);
-      position: relative;
-    }
-    .abidkhan-corner-img::after,
-    .abidkhan-profile-img::after {
-      content: "";
-      position: absolute;
-      top: 0; left: 0;
-      height: 100%; width: 100%;
-      border-radius: 50%;
-      background: linear-gradient(135deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 60%);
-      pointer-events: none;
-    }
-
-    .corner-img {
-      position: fixed;
-      top:20px;
-      left:20px;
-      width:50px;
-      height:50px;
-      border-radius:50%;
-      border:2px solid #4fc3f7;
-      box-shadow:0 0 12px rgba(79,195,247,0.8);
-      z-index:1000;
-    }
-   .abidkhan-navbar {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(0,0,0,0.6);
-      backdrop-filter: blur(10px);
-      padding: 12px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .abidkhan-nav-brand {
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: #4fc3f7;
-      text-decoration: none;
-      text-shadow: 0 2px 6px rgba(0,0,0,0.3);
     }
     .btn:hover { background:#81d4fa; transform:scale(1.05); }
 
@@ -285,11 +167,10 @@
       border-top:1px solid rgba(255,255,255,0.2);
     }
   </style>
-</style>
 </head>
 <body>
   <!-- Dashboard Profile -->
-  <div class="abidkhan-dashboard-profile" style="text-align:center; margin-top:20px;">
+  <div style="text-align:center; margin-top:20px;">
     <img src="https://raw.githubusercontent.com/professionalabidkhan-hue/ABID-KHAN-/main/ABID%20KHAN.png" 
          alt="Abid Khan" class="abidkhan-profile-img">
     <h2>Welcome, Abid Khan</h2>
@@ -304,6 +185,7 @@
     <img src="https://raw.githubusercontent.com/professionalabidkhan-hue/ABID-KHAN-/main/ABID%20KHAN.png" 
          alt="Abid Khan" class="abidkhan-corner-img">
   </nav>
+
 
 <!-- Main Content -->
 <main>
@@ -561,53 +443,74 @@
   <p>Get guidance from top online math experts for competitive exams, Olympiads, and advanced problem-solving.</p>
   <button class="btn">Enroll Now</button>
 </article>
-
 </main>
-
-  
-<!-- Footer -->
+<!-- FOOTER -->
 <footer style="background:#ffffff; padding:30px 20px; text-align:center; box-shadow:0 -4px 12px rgba(0,0,0,0.05);">
   <h3 style="margin-bottom:12px; color:#111827;">Get in Touch on WhatsApp</h3>
 
   <!-- WhatsApp Alias Input -->
   <input type="text" id="footerNumberInput" placeholder="Enter number (e.g. 1111-1111111)" 
          style="padding:10px 12px; border-radius:8px; border:1px solid #d1d5db; width:220px; margin-bottom:12px;">
-  
   <button id="footerWhatsappBtn" style="padding:10px 20px; border-radius:999px; background:#0b63d3; color:#fff; font-weight:600; border:none; cursor:pointer; transition:0.3s;">
     Message on WhatsApp
   </button>
 
   <!-- Footer text with alias numbers -->
   <p style="margin-top:16px; color:#6b7280;">
-    © <span id="year"></span> Abid Khan's E-Learning Hub | Contact on WhatsApp: 
+    © <span id="year"></span> Abid Khan's E-Learning Hub | Contact on WhatsApp: 1111-1111111, 2222-2222222
   </p>
 </footer>
-</body>
+
 <script>
-    // Hamburger toggle
-    const hamburger = document.getElementById("hamburger");
-    const navLinks = document.getElementById("nav-links");
+  const footerNumberMap = {
+    "1111-1111111": "923497469638",
+    "2222-2222222": "923497469638"
+  };
 
-    if (hamburger && navLinks) {
-      hamburger.addEventListener("click", () => {
-        navLinks.classList.toggle("show");
-        hamburger.classList.toggle("open");
+  document.getElementById('footerWhatsappBtn').addEventListener('click', function() {
+    const input = document.getElementById('footerNumberInput').value.trim();
+    const actualNumber = footerNumberMap[input] || input;
+    const cleaned = actualNumber.replace(/[^0-9]/g, '');
+    const message = encodeURIComponent("Abid Khan");
+    const url = `https://api.whatsapp.com/send?phone=${cleaned}&text=${message}`;
+    window.open(url, "_blank");
+  });
 
-        // Toggle aria-expanded for accessibility
-        const expanded = hamburger.classList.contains("open");
-        hamburger.setAttribute("aria-expanded", expanded);
+  // Footer year update
+  document.getElementById("year").textContent = new Date().getFullYear();
 
-        // Reset transition delays when closing
-        if (!navLinks.classList.contains("show")) {
-          navLinks.querySelectorAll("a").forEach(link => {
-            link.style.transitionDelay = "0s";
-          });
-        } else {
-          navLinks.querySelectorAll("a").forEach((link, index) => {
-            link.style.transitionDelay = `${(index + 1) * 0.1}s`;
-          });
-        }
-      });
+  // Highlight based on URL
+  const current = window.location.pathname.split("/").pop();
+  document.querySelectorAll(".nav-links a").forEach(link => {
+    if (link.getAttribute("href") === current) {
+      link.classList.add("active");
     }
-  </script>
+    link.addEventListener("click", e => {
+      document.querySelectorAll(".nav-links a").forEach(a => a.classList.remove("active"));
+      e.currentTarget.classList.add("active");
+    });
+  });
+
+  // Hamburger toggle
+  const hamburger = document.getElementById("hamburger");
+  const navLinks = document.getElementById("nav-links");
+  if (hamburger && navLinks) {
+    hamburger.addEventListener("click", () => {
+      navLinks.classList.toggle("show");
+      hamburger.classList.toggle("open");
+    });
+  }
+
+  // Dark mode toggle
+  const themeToggle = document.getElementById("themeToggle");
+  if (themeToggle) {
+    themeToggle.addEventListener("click", () => {
+      document.body.classList.toggle("dark");
+    });
+  }
+</script>
+
+
+  
+
 </html>
