@@ -314,77 +314,69 @@ body.dark .footer {
     © <span id="year"></span> Abid Khan's E-Learning Hub | Contact on WhatsApp: 1111-1111111, 2222-2222222
   </p>
 </footer>
-
-
-
-
-
-
 <script>
-  // ✅ All aliases point to your single WhatsApp number
-  const fixedWhatsAppNumber = "923497469638"; // Your actual WhatsApp number
-  const footerNumberMap = {
-    "1111-1111111": fixedWhatsAppNumber,
-    "2222-2222222": fixedWhatsAppNumber
-  };
+  // --- Branding Lock ---
+  const siteTitle = document.querySelector('.nav-title')?.textContent?.trim();
+  const siteLogo = document.querySelector('.nav-logo')?.getAttribute('src');
 
-  document.getElementById('footerWhatsappBtn').addEventListener('click', function() {
-    const input = document.getElementById('footerNumberInput').value.trim();
+  const allowedTitle = "Abid Khan's E-Learning Hub";
+  const allowedLogo = "https://raw.githubusercontent.com/professionalabidkhan-hue/ABID-KHAN-/main/ABID%20KHAN.png";
 
-    // Always resolve to your fixed number
-    const actualNumber = footerNumberMap[input] || fixedWhatsAppNumber;
+  if (siteTitle === allowedTitle && siteLogo === allowedLogo) {
+    // WhatsApp button functionality
+    const footerNumberMap = {
+      "1111-1111111": "923497469638",
+      "2222-2222222": "923497469638"
+    };
 
-    const cleaned = actualNumber.replace(/[^0-9]/g, '');
+    document.getElementById('footerWhatsappBtn').addEventListener('click', function() {
+      const input = document.getElementById('footerNumberInput').value.trim();
+      const actualNumber = footerNumberMap[input] || input;
+      const cleaned = actualNumber.replace(/[^0-9]/g, '');
+      const message = encodeURIComponent("Assalam O Alaikum, I am reaching out to express my interest in the WordPress & Hosting course offered by Abid Khan's E-Learning Hub.");
+      const url = `https://api.whatsapp.com/send?phone=${cleaned}&text=${message}`;
+      window.open(url, "_blank"); // ✅ directly opens WhatsApp page
+    });
 
-    // ✅ Pre-filled message with your name
-    const message = encodeURIComponent("Assalamu Alaikum, contacting Abid Khan");
+    // Footer year update
+    document.getElementById("year").textContent = new Date().getFullYear();
 
-    // ✅ Open WhatsApp API link
-    const url = `https://api.whatsapp.com/send?phone=${cleaned}&text=${message}`;
+    // Highlight active nav link
+    const current = window.location.pathname.split("/").pop();
+    document.querySelectorAll(".nav-links a").forEach(link => {
+      if (link.getAttribute("href") === current) {
+        link.classList.add("active");
+      }
+      link.addEventListener("click", e => {
+        document.querySelectorAll(".nav-links a").forEach(a => a.classList.remove("active"));
+        e.currentTarget.classList.add("active");
+      });
+    });
 
-    window.open(url, "_blank");
-  });
-
-  // ✅ Auto-update footer year
-  document.getElementById("year").textContent = new Date().getFullYear();
-</script>
-
-<script>
-  // Highlight based on URL
-  const current = window.location.pathname.split("/").pop();
-  document.querySelectorAll(".abid-nav a").forEach(link => {
-    // Highlight the link if it matches the current page
-    if (link.getAttribute("href") === current) {
-      link.classList.add("active");
+    // Hamburger toggle
+    const hamburger = document.getElementById("hamburger");
+    const navLinks = document.getElementById("nav-links");
+    if (hamburger && navLinks) {
+      hamburger.addEventListener("click", () => {
+        navLinks.classList.toggle("show");
+        hamburger.classList.toggle("open");
+      });
     }
-    // Also handle click events
-    link.addEventListener("click", e => {
-      document.querySelectorAll(".abid-nav a").forEach(a => a.classList.remove("active"));
-      e.currentTarget.classList.add("active");
-    });
-  });
 
-  // Footer year update
-  document.getElementById("year").textContent = new Date().getFullYear();
-
-  // Hamburger toggle
-  const hamburger = document.getElementById("hamburger");
-  const navLinks = document.getElementById("navLinks");
-  if (hamburger && navLinks) {
-    hamburger.addEventListener("click", () => {
-      navLinks.classList.toggle("show");
-      hamburger.classList.toggle("open");
-    });
-  }
-
-  // Dark mode toggle
-  const themeToggle = document.getElementById("themeToggle");
-  if (themeToggle) {
-    themeToggle.addEventListener("click", () => {
-      document.body.classList.toggle("dark");
-    });
+    // Dark mode toggle
+    const themeToggle = document.getElementById("themeToggle");
+    if (themeToggle) {
+      themeToggle.addEventListener("click", () => {
+        document.body.classList.toggle("dark");
+      });
+    }
+  } else {
+    // ❌ Removed alert popup
+    console.error("⚠️ Script blocked: Unauthorized site name or logo detected.");
+    // Do nothing silently
   }
 </script>
+
 </body>
 </html>
 
