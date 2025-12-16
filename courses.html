@@ -461,32 +461,19 @@
   <button id="footerWhatsappBtn" style="padding:10px 20px; border-radius:999px; background:#0b63d3; color:#fff; font-weight:600; border:none; cursor:pointer; transition:0.3s;">
     Message on WhatsApp
   </button>
+<div id="footer-placeholder"></div>
+<script>
+  fetch("footer.html")
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById("footer-placeholder").innerHTML = data;
+    });
+</script>
 
-  <!-- Footer text with alias numbers -->
-  <p style="margin-top:16px; color:#6b7280;">
-    © <span id="year"></span> Abid Khan's E-Learning Hub | Contact on WhatsApp: 1111-1111111, 2222-2222222
-  </p>
-</footer>
+ 
 
 <script>
-  const footerNumberMap = {
-    "1111-1111111": "923497469638",
-    "2222-2222222": "923497469638"
-  };
-
-  document.getElementById('footerWhatsappBtn').addEventListener('click', function() {
-    const input = document.getElementById('footerNumberInput').value.trim();
-    const actualNumber = footerNumberMap[input] || input;
-    const cleaned = actualNumber.replace(/[^0-9]/g, '');
-    const message = encodeURIComponent("ABID KHAN");
-    const url = `https://api.whatsapp.com/send?phone=${cleaned}&text=${message}`;
-    window.open(url, "_blank");
-  });
-
-  // Footer year update
-  document.getElementById("year").textContent = new Date().getFullYear();
-
-  // Highlight based on URL
+   // Highlight based on URL
   const current = window.location.pathname.split("/").pop();
   document.querySelectorAll(".nav-links a").forEach(link => {
     if (link.getAttribute("href") === current) {
