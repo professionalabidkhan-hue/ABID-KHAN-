@@ -1,3 +1,6 @@
+// Load environment variables
+require('dotenv').config();
+
 // Import dependencies
 const express = require('express');
 const AIAgent = require('./agents/ai-agent');
@@ -11,7 +14,7 @@ const PORT = process.env.PORT || 3000;
 const ai = new AIAgent('FintechAI');
 const chat = new ChatAgent('HelperBot');
 
-// ⚠️ Use environment variable for sensitive data like phone numbers
+// Use environment variable for sensitive data like phone numbers
 const whatsappNumber = process.env.WHATSAPP_NUMBER || '+923000000000';
 const whatsapp = new WhatsAppAgent(whatsappNumber);
 
