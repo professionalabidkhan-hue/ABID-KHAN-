@@ -1,24 +1,48 @@
+const chatContainer = document.getElementById("chatContainer");
+const input = document.getElementById("question");
+
+// Handle Enter key
+function handleEnter(event) {
+  if (event.key === "Enter") {
+    askAgent();
+  }
+}
+
+// Handle Send button
 async function askAgent() {
-  const input = document.getElementById("question");
-  const message = input.value.trim();
-  if (!message) return;
+  const text = input.value.trim();
+  if (text === "") return;
 
-  addMessage(message, 'user');
-  input.value = '';
-  scrollToBottom();
+  // Show user message
+  const userMsg = document.createElement("div");
+  userMsg.className = "message user";
+  userMsg.textContent = text;
+  chatContainer.appendChild(userMsg);
 
+  input.value = "";
+
+  // Call backend API
   try {
-    const response = await fetch("http://localhost:3000/api/agent", { // Use your deployed backend URL
+    const response = await fetch("/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message: message })
+      body: JSON.stringify({ question: text })
     });
 
     const data = await response.json();
-    addMessage(data.reply || "Sorry, no response from AI.", 'ai');
-    scrollToBottom();
+
+    // Show AI reply
+    const aiMsg = document.createElement("div");
+    aiMsg.className = "message ai";
+    aiMsg.textContent = data.answer || "No reply received.";
+    chatContainer.appendChild(aiMsg);
+
+    // Scroll to bottom
+    chatContainer.scrollTop = chatContainer.scrollHeight;
   } catch (error) {
-    addMessage("Error connecting to AI. Try again.", 'ai');
-    console.error(error);
+    const errorMsg = document.createElement("div");
+    errorMsg.className = "message ai";
+    errorMsg.textContent = "Error contacting server.";
+    chatContainer.appendChild(errorMsg);
   }
 }
