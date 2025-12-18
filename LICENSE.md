@@ -4,7 +4,7 @@ All rights reserved.
 ## Terms and Conditions
 
 1. **Ownership**  
-   This software and all associated documentation are the exclusive property of ABID KHAN FINTECH INSTITUTE.
+   This software and all associated documentation are the exclusive property of ABID KHAN professionalabidkhan2gmail.com.
 
 2. **Restrictions**  
    - No permission is granted to copy, modify, merge, publish, distribute, sublicense, or sell copies of this software.  
