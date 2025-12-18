@@ -1,9 +1,13 @@
-# ABID KHAN'S FINTECH INSTITUE
+# ABID KHAN FINTECH INSTITUTE
 
-This contains educational modules for fintech concepts, including mobile wallets, payment systems, blockchain mining simulations, and QR code demonstrations.  
-It is designed for teaching, testing with simulated data, and building secure, transparent payment flows.
+## Vision
+Building secure, scalable fintech solutions with global distinction.
 
----
+## Current Stage
+Brand registration in progress. Repo will expand after legal confirmation.
 
-## 📂 Folder Structure
-
+## Roadmap
+- Secure trademark
+- Deploy backend (Firebase or similar)
+- Connect frontend with robust error handling
+- Publish teaching modules and dashboards
