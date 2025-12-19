@@ -56,6 +56,37 @@
     display: block; /* Bootstrap toggles this on tap */
   }
 }
+.corner-img {
+  position: fixed;        /* stays in place when scrolling */
+  bottom: 20px;           /* distance from bottom */
+  right: 20px;            /* distance from right */
+  width: 120px;           /* size of the image */
+  height: auto;           /* keep aspect ratio */
+  border-radius: 12px;    /* rounded corners */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25); /* subtle shadow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;        /* pointer cursor on hover */
+}
+
+.corner-img:hover {
+  transform: scale(1.05); /* slight zoom on hover */
+  box-shadow: 0 6px 16px rgba(0,0,0,0.35);
+}
+.corner-img {
+  border-radius: 50%;
+  border: 3px solid #0b63d3; /* your brand blue */
+}
+.corner-img {
+  top: 20px;
+  left: 20px;
+  bottom: auto;
+  right: auto;
+}
+@media (max-width: 768px) {
+  .corner-img {
+    width: 80px;
+  }
+}
 
 </style>
   <body>
@@ -255,11 +286,7 @@
         </li>
       </ul>
 
-      <!-- Right: Search -->
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search courses" aria-label="Search">
-        <button class="btn btn-outline-primary" type="submit">Search</button>
-      </form>
+   <img src="https://raw.githubusercontent.com/professionalabidkhan-hue/ABID-KHAN-/main/ABID%20KHAN.png" alt="Abid Khan" class="corner-img">
     </div>
   </div>
 </nav>
