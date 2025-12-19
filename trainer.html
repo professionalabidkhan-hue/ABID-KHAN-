@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+<section class="trainer-section">
+  <h2>Our Trainers</h2>
+  <div class="category-buttons">
+    <button data-category="All">All</button>
+    <button data-category="IT">IT</button>
+    <button data-category="Holy Quran">Holy Quran</button>
+    <button data-category="Coaching">Coaching</button>
+    <button data-category="Global Ability">Global Ability</button>
+  </div>
+  <div id="trainerCards" class="trainer-cards"></div>
+</section>
+
+<script>
+const backendURL = "YOUR_APPS_SCRIPT_WEBAPP_URL"; // replace with your Apps Script URL
+
+// ------------------ SIGNUP SUBMISSION ------------------
+function sendCode() {
+  const name = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+  const phone = document.getElementById("phone").value;
+  const role = document.getElementById("role").value;
+  const category = document.getElementById("category-select").value;
+  const description = ""; // optional, you can add a textarea for description
+  const image = "images/trainers/default.png"; // placeholder image, extend if file upload exists
+
+  fetch(backendURL, {
+    method: "POST",
+    body: JSON.stringify({
+      action: "signUp",
+      name,
+      email,
+      password,
+      phone,
+      role,
+      category,
+      description,
+      image
+    })
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.message === "Sign Up successful") {
+      alert("Sign Up successful! Your profile will appear in the respective page.");
+      document.getElementById("signupStep").classList.add("hidden");
+    } else {
+      alert(data.message);
+    }
+  });
+}
+
+// ------------------ DYNAMIC TRAINER DISPLAY ------------------
+function loadTrainers() {
+  fetch(backendURL + "?action=getTrainers")
+    .then(res => res.json())
+    .then(trainers => {
+      const container = document.getElementById("trainerCards");
+      const buttons = document.querySelectorAll('.category-buttons button');
+
+      function display(category) {
+        container.innerHTML = '';
+        const filtered = category === 'All'
+          ? trainers
+          : trainers.filter(t => t.category === category);
+        filtered.forEach(t => {
+          const card = document.createElement('div');
+          card.classList.add('trainer-card');
+          card.innerHTML = `
+            <img src="${t.image}" alt="${t.name}" />
+            <h3>${t.name}</h3>
+            <p>${t.category}</p>
+            <p>${t.description || ''}</p>
+          `;
+          container.appendChild(card);
+        });
+      }
+
+      buttons.forEach(btn => btn.addEventListener('click', () => display(btn.dataset.category)));
+      display('All'); // initial load
+    });
+}
+
+// Automatically call on page load if trainer section exists
+if(document.getElementById("trainerCards")) {
+  loadTrainers();
+}
+</script>
+
+
+    
+  </body>
+</html>
