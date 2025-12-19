@@ -1,360 +1,293 @@
+<!DOCTYPE html>
 <html>
+<!-- http://jsbin.com/deqaha/5/edit?html,css,js,output -->
 <head>
-<title>Nav </title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/mega-style2.css">
+    <link rel="stylesheet" type="text/css" href="css/mega-media2.css">
+    <title>ABID KHAM E LEARNING HUB</title>
   <style>
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
+    
+  /*
+Credits:
+Code snippet by @maridlcrmn (Follow me on Twitter)
+Images by Nike.com (http://www.nike.com/us/en_us/)
+https://bootsnipp.com/snippets/featured/mega-menu-with-tabs-navigation
+Logo by Sneaker-mission.com (http://www.sneaker-mission.com/)
+*/
 
-:root {
-  --color-white-100: hsl(0, 0%, 100%);
-  --color-white-200: hsl(0, 0%, 95%);
-  --color-white-300: hsl(0, 0%, 85%);
-  --color-white-400: hsl(0, 0%, 75%);
-  --color-white-500: hsl(0, 0%, 65%);
-  --color-white-600: hsl(0, 0%, 55%);
-
-  --color-black-100: hsl(210, 17%, 12%);
-  --color-black-200: hsl(210, 17%, 10%);
-  --color-black-300: hsl(210, 16%, 8%);
-  --color-black-400: hsl(210, 16%, 6%);
-  --color-black-500: hsl(210, 15%, 4%);
-  --color-black-600: hsl(210, 15%, 2%);
-
-  --color-blue-100: hsl(212, 96%, 60%);
-  --color-blue-200: hsl(213, 94%, 55%);
-  --color-blue-300: hsl(217, 91%, 50%);
-  --color-blue-400: hsl(221, 83%, 45%);
-  --color-blue-500: hsl(224, 76%, 40%);
-  --color-blue-600: hsl(226, 71%, 35%);
-
-  --text-tiny: clamp(0.84rem, calc(0.12vw + 0.8rem), 0.89rem);
-  --text-small: clamp(0.93rem, calc(0.13vw + 0.91rem), 1rem);
-  --text-base: clamp(1.05rem, calc(0.15vw + 1.01rem), 1.12rem);
-  --text-medium: clamp(1.18rem, calc(0.17vw + 1.14rem), 1.26rem);
-  --text-large: clamp(1.32rem, calc(0.19vw + 1.28rem), 1.41rem);
-
-  --shadow-small: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
-    0 1px 2px 0 rgba(0, 0, 0, 0.06);
-  --shadow-medium: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-    0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  --shadow-large: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
-    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+.navbar-brand { 
+  width: 70px;
+  height: 50px;
+  background: url('http://www.sneaker-mission.com/uploads/3/1/2/7/31279819/5617441.png') no-repeat center center;
+  background-size: 50px;  
 }
 
-*,
-*::before,
-*::after {
-  padding: 0;
-  margin: 0;
-  list-style: none;
-  text-decoration: none;
-  box-sizing: border-box;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
+.nav-tabs {
+  display: inline-block;
+  border-bottom: none;
+  /*padding-top: 15px;*/
+  font-weight: bold;
 }
 
-html {
-  font-size: 100%;
-  font-style: normal;
-  scroll-behavior: smooth;
-  height: -webkit-fill-available;
-}
+.nav-tabs>li{float: none;}
 
-body {
-  font-family: "Roboto", system-ui, ui-sans-serif, sans-serif;
-  font-size: var(--text-base);
-  font-weight: 400;
-  line-height: 1.5;
-  color: var(--color-black-500);
-  background-color: var(--color-white-100);
-}
 
-main,
-section {
-  overflow: hidden;
-}
 
-a,
-button {
-  cursor: pointer;
-  user-select: none;
-  white-space: nowrap;
+.nav-tabs > li > a, 
+.nav-tabs > li > a:hover, 
+.nav-tabs > li > a:focus, 
+.nav-tabs > li.active > a, 
+.nav-tabs > li.active > a:hover,
+.nav-tabs > li.active > a:focus {
   border: none;
-  outline: none;
-  color: inherit;
-  background: none;
+  border-radius: 0;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5 {
-  line-height: 1.15;
-  word-wrap: break-word;
+.nav-list {    margin-bottom: 25px;}
+.nav-list > li { 
+  /*padding: 20px 15px 15px;
+  border-left: 1px solid #eee; */
+  display: block;
 }
-
-p {
-  max-width: 50ch;
-}
-
-p,
-li {
-  line-height: inherit;
-  word-wrap: break-word;
-}
-
-img,
-svg,
-picture,
-video {
-  font-style: italic;
-  max-width: 100%;
-  height: auto;
-  object-fit: cover;
-  vertical-align: middle;
-}
-
-img,
-svg {
-  background-size: cover;
-  background-repeat: no-repeat;
-  image-rendering: crisp-edges;
-  image-rendering: -moz-crisp-edges;
-  image-rendering: -webkit-optimize-contrast;
-}
-
-/* Utility classes */
-.section { margin-inline: auto; margin-block: 5rem 2rem; }
-.container { max-width: 75rem; margin-inline: auto; padding-inline: 1.5rem; }
-.center { display: flex; align-items: center; justify-content: center; }
-.between { display: flex; align-items: center; justify-content: space-between; }
-
-.text-tiny { font-size: var(--text-tiny); }
-.text-small { font-size: var(--text-small); }
-.text-base { font-size: var(--text-base); }
-.text-medium { font-size: var(--text-medium); }
-.text-large { font-size: var(--text-large); }
-
-.font-normal { font-weight: 400; }
-.font-medium { font-weight: 500; }
-.font-semi { font-weight: 600; }
-.font-bold { font-weight: 700; }
-
-.text-uppercase { text-transform: uppercase; }
-.text-lowercase { text-transform: lowercase; }
-.text-capitalize { text-transform: capitalize; }
-
-/* Buttons */
-.btn {
-  display: inline-flex;
-  font-family: inherit;
-  font-size: 1rem;
-  font-weight: 500;
-  line-height: 1.6;
-  align-items: center;
-  justify-content: center;
-  padding: 0.5rem 1.5rem;
-  border-radius: 0.25rem;
-  transition: all 0.25s ease;
-}
-.btn-default {
-  color: var(--color-black-500);
-  background-color: var(--color-white-100);
-  box-shadow: var(--shadow-medium);
-}
-.btn-darken {
-  color: var(--color-white-100);
-  background-color: var(--color-black-500);
-  box-shadow: var(--shadow-medium);
-}
-
-/* Header */
-.header {
-  position: fixed;
-  top: 0; left: 0;
-  z-index: 10;
-  width: 100%;
-  background-color: var(--color-white-100);
-  box-shadow: var(--shadow-medium);
-}
-.brand {
-  font-size: 1.6rem;
-  font-weight: 700;
+/*.nav-list > li:last-child { border-right: 1px solid #eee; }*/
+.nav-list > li > a:hover { text-decoration: none; }
+.nav-list > li > a > span {
+  display: block;
+  font-weight: bold;
   text-transform: uppercase;
-  color: var(--color-blue-300);
 }
 
-/* Navbar */
-.navbar { width: 100%; height: 4.25rem; margin-inline: auto; }
-.navbar-inner { display: flex; align-items: center; justify-content: space-between; height: 100%; }
-.navbar-block {
-  position: absolute; left: 0; width: 100%;
-  height: calc(100vh - 4rem);
-  opacity: 0; pointer-events: none;
-  background-color: var(--color-white-100);
-  transition: opacity 0.4s ease;
-}
-.navbar-block.is-active { opacity: 1; pointer-events: initial; }
-
-@media screen and (min-width: 62rem) {
-  .navbar { display: flex; justify-content: space-between; }
-  .navbar-block {
-    position: initial; height: auto; opacity: 1;
-    pointer-events: auto; background: none; transition: none;
-  }
+.mega-dropdown { position: relative; }
+.mega-dropdown-menu {
+  padding: 0;
+  text-align: center;
+  width: 900px;
 }
 
-/* Menu */
-.menu { padding-block: 1rem; }
-.menu-link {
-  font-size: var(--text-base);
-  font-weight: 500;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 0.5rem 1.5rem;
-  color: var(--color-black-500);
-  transition: color 0.3s ease;
-}
-@media screen and (min-width: 62rem) {
-  .menu { display: flex; flex-direction: row; column-gap: 1rem; padding: 0; }
-  .menu-item { display: flex; cursor: pointer; padding-inline: 0.5rem; }
-  .menu-link { padding: 0; }
-}
+/*=======================*/
 
-/* Dropdown */
-.dropdown-toggle { cursor: pointer; }
-.dropdown-toggle i.bx { font-size: 1.5rem; transition: rotate 0.4s ease; }
-.dropdown-content {
-  height: 0; overflow: hidden;
-  background-color: var(--color-white-100);
-  transition: height 0.5s ease;
-}
-.dropdown-column, .dropdown-group, .dropdown-items { display: grid; }
-.dropdown-group { padding: 0 1.5rem 1rem; }
-.dropdown-title { display: flex
+/*.tab-content{background: goldenrod;}*/
+.nav-tabs>li{}
+.nav-tabs>li a{padding: 29px 23px;
+    background: #31aff5;font-size: 15px;color: #fff}
+.nav-tabs>li.active>a{background: #31aff5;color: #fff;}
+.ht-tab.col-md-2{padding: 0;}
+.ht-tab.col-md-10{padding: 0;}
+.ht-ul{text-align: left;}
+/*.ht-ul hr{margin: 10px 0;}*/
 
-    
+
+
+@media screen and (max-width: 1169px){
+	.nav-tabs{display: block;}
+
+.mega-dropdown-menu{width: 100%;}
+.nav>li, .mega-dropdown, .dropdown{position: unset;}
+
+}
+@media screen and (max-width: 1023px){
+
+.ht-tab.col-md-2, .ht-tab.col-md-10 {float: left !important;}
+.ht-tab.col-md-2{width: 20%;}
+.ht-tab.col-md-10{width: 80%;}
+.ht-ul{float: left;}
+}
+@media screen and (max-width: 767px){
+
+}
   </style>
-</head>  
+</head>
+
 <body>
-<header class="header" id="header">
-  <nav class="navbar container">
-    <div class="navbar-inner">
-      <a href="frontend/html/index.html" class="brand">ABID KHAN FINTECH</a>
-      <div class="burger" id="burger">
-        <span class="burger-line"></span>
-        <span class="burger-line"></span>
-        <span class="burger-line"></span>
-      </div>
-    </div>
-    <div class="navbar-block" id="menu">
-      <ul class="menu">
-        <li class="menu-item"><a href="frontend/html/index.html" class="menu-link">Home</a></li>
-
-        <!-- Courses Dropdown -->
-        <li class="menu-item dropdown">
-          <span class="dropdown-toggle menu-link">
-            Courses <i class="bx bx-chevron-down"></i>
-          </span>
-          <div class="dropdown-content">
-            <div class="dropdown-column">
-              <div class="dropdown-group">
-                <div class="dropdown-title">
-                  <span class="dropdown-icon"><i class="bx bx-code"></i></span>
-                  <span class="text-base font-medium">Programming</span>
-                </div>
-                <ul class="dropdown-items">
-                  <li><a href="frontend/html/PythonforBeginners.html" class="dropdown-link">Python for Beginners</a></li>
-                  <li><a href="frontend/html/python.html" class="dropdown-link">Python Advanced</a></li>
-                  <li><a href="frontend/html/DataScienceBasics.html" class="dropdown-link">Data Science Basics</a></li>
-                  <li><a href="frontend/html/Dashboard-Card.html" class="dropdown-link">Dashboard Card</a></li>
-                </ul>
-              </div>
-              <div class="dropdown-group">
-                <div class="dropdown-title">
-                  <span class="dropdown-icon"><i class="bx bx-devices"></i></span>
-                  <span class="text-base font-medium">Web & Design</span>
-                </div>
-                <ul class="dropdown-items">
-                  <li><a href="frontend/html/WordPress&Hosting.html" class="dropdown-link">WordPress & Hosting</a></li>
-                  <li><a href="frontend/html/website.html" class="dropdown-link">Website Development</a></li>
-                  <li><a href="frontend/html/digitalmarketing.html" class="dropdown-link">Digital Marketing</a></li>
-                  <li><a href="frontend/html/content-writing.html" class="dropdown-link">Content Writing</a></li>
-                </ul>
-              </div>
-              <div class="dropdown-group">
-                <div class="dropdown-title">
-                  <span class="dropdown-icon"><i class="bx bx-bookmark"></i></span>
-                  <span class="text-base font-medium">Certifications</span>
-                </div>
-                <ul class="dropdown-items">
-                  <li><a href="frontend/html/courses.html" class="dropdown-link">All Courses</a></li>
-                  <li><a href="frontend/html/accounting&finance.html" class="dropdown-link">Accounting & Finance</a></li>
-                  <li><a href="frontend/html/IELTS.html" class="dropdown-link">IELTS</a></li>
-                  <li><a href="frontend/html/toefl.html" class="dropdown-link">TOEFL</a></li>
-                </ul>
-              </div>
+    <!------ Include the above in your HEAD tag ---------->
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-megadropdown-tabs">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#"></a>
             </div>
-          </div>
-        </li>
-
-        <!-- Discover Dropdown -->
-        <li class="menu-item dropdown">
-          <span class="dropdown-toggle menu-link">
-            Discover <i class="bx bx-chevron-down"></i>
-          </span>
-          <div class="dropdown-content">
-            <div class="dropdown-column">
-              <div class="dropdown-group">
-                <div class="dropdown-block">
-                  <span class="dropdown-icon"><i class="bx bx-podcast"></i></span>
-                  <div class="dropdown-inner">
-                    <a href="frontend/html/abidhub-chat.html" class="text-base font-medium">ABIDHUB Chat</a>
-                    <p class="text-base font-normal">Interactive chat and podcasts.</p>
-                  </div>
-                </div>
-                <div class="dropdown-block">
-                  <span class="dropdown-icon"><i class="bx bx-video"></i></span>
-                  <div class="dropdown-inner">
-                    <a href="frontend/html/tutorials.html" class="text-base font-medium">Tutorials</a>
-                    <p class="text-base font-normal">Learn with professional instructors.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="dropdown-group">
-                <div class="dropdown-block">
-                  <span class="dropdown-icon"><i class="bx bx-book-open"></i></span>
-                  <div class="dropdown-inner">
-                    <a href="frontend/html/help.html" class="text-base font-medium">Help Center</a>
-                    <p class="text-base font-normal">Guides on registration and usage.</p>
-                  </div>
-                </div>
-                <div class="dropdown-block">
-                  <span class="dropdown-icon"><i class="bx bx-bookmark"></i></span>
-                  <div class="dropdown-inner">
-                    <a href="frontend/html/community.html" class="text-base font-medium">Community</a>
-                    <p class="text-base font-normal">Connect with other learners.</p>
-                  </div>
-                </div>
-              </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
+                <ul class="nav navbar-nav">
+                    <li><a href="#">Link</a></li>
+                    <li><a href="#">Link</a></li>
+                    <li class="dropdown mega-dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+                        <div class="dropdown-menu mega-dropdown-menu" style="display: block !important;">
+                            <div class="">
+                                <!-- Tab panes -->
+                                <div class="col-md-2 col-sm-2 ht-tab">
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        <li class="active"><a href="#retail" role="tab" data-toggle="tab">Retail</a></li>
+                                        <li><a href="#manufacturing" role="tab" data-toggle="tab">Manufacturing</a></li>
+                                        <li><a href="#service" role="tab" data-toggle="tab">Service sector</a></li>
+                                        <li><a href="#other" role="tab" data-toggle="tab">Others</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-10 col-sm-10 ht-tab">
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="retail">
+                                            <div class="col-md-4 ht-ul">
+                                                <h4>Chemical Industry</h4>
+                                                <ul class="nav-list list-inline">
+                                                    <li><a href="#" class="retail2">Auto Accessories Store</a></li>
+                                                    <li><a href="#" class="retail4">Bridal Store</a></li>
+                                                    <li><a href="#" class="retail5">Cake Shop</a></li>
+                                                    <li><a href="#" class="retail6">Cartridge Refilling Store</a></li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-md-4 ht-ul">
+                                                <h4>Chemical Industry</h4>
+                                                <ul class="nav-list list-inline">
+                                                    <li><a href="#" class="retail2">Auto Accessories Store</a></li>
+                                                    <li><a href="#" class="retail4">Bridal Store</a></li>
+                                                    <li><a href="#" class="retail5">Cake Shop</a></li>
+                                                    <li><a href="#" class="retail6">Cartridge Refilling Store</a></li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-md-4 ht-ul">
+                                                <h4>Chemical Industry</h4>
+                                                <ul class="nav-list list-inline">
+                                                    <li><a href="#" class="retail2">Auto Accessories Store</a></li>
+                                                    <li><a href="#" class="retail4">Bridal Store</a></li>
+                                                    <li><a href="#" class="retail5">Cake Shop</a></li>
+                                                    <li><a href="#" class="retail6">Cartridge Refilling Store</a></li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-md-4 ht-ul">
+                                                <h4>Chemical Industry</h4>
+                                                <ul class="nav-list list-inline">
+                                                    <li><a href="#" class="retail2">Auto Accessories Store</a></li>
+                                                    <li><a href="#" class="retail4">Bridal Store</a></li>
+                                                    <li><a href="#" class="retail5">Cake Shop</a></li>
+                                                    <li><a href="#" class="retail6">Cartridge Refilling Store</a></li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-md-4 ht-ul">
+                                                <h4>Chemical Industry</h4>
+                                                <ul class="nav-list list-inline">
+                                                    <li><a href="#" class="retail2">Auto Accessories Store</a></li>
+                                                    <li><a href="#" class="retail4">Bridal Store</a></li>
+                                                    <li><a href="#" class="retail5">Cake Shop</a></li>
+                                                    <li><a href="#" class="retail6">Cartridge Refilling Store</a></li>
+                                                </ul>
+                                            </div>
+                                            
+                                        </div>
+                                        <div class="tab-pane" id="manufacturing">
+                                          <div class="col-md-4 ht-ul">
+                                                <h4>Chemical Industry</h4>
+                                                <ul class="nav-list list-inline">
+                                                    <li><a href="#" class="retail2">Auto Accessories Store</a></li>
+                                                    <li><a href="#" class="retail4">Bridal Store</a></li>
+                                                    <li><a href="#" class="retail5">Cake Shop</a></li>
+                                                    <li><a href="#" class="retail6">Cartridge Refilling Store</a></li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-md-4 ht-ul">
+                                                <h4>Chemical Industry</h4>
+                                                <ul class="nav-list list-inline">
+                                                    <li><a href="#" class="retail2">Auto Accessories Store</a></li>
+                                                    <li><a href="#" class="retail4">Bridal Store</a></li>
+                                                    <li><a href="#" class="retail5">Cake Shop</a></li>
+                                                    <li><a href="#" class="retail6">Cartridge Refilling Store</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane" id="service">
+                                           <div class="col-md-4 ht-ul">
+                                                <h4>Chemical Industry</h4>
+                                                <ul class="nav-list list-inline">
+                                                    <li><a href="#" class="retail2">Auto Accessories Store</a></li>
+                                                    <li><a href="#" class="retail4">Bridal Store</a></li>
+                                                    <li><a href="#" class="retail5">Cake Shop</a></li>
+                                                    <li><a href="#" class="retail6">Cartridge Refilling Store</a></li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-md-4 ht-ul">
+                                                <h4>Chemical Industry</h4>
+                                                <ul class="nav-list list-inline">
+                                                    <li><a href="#" class="retail2">Auto Accessories Store</a></li>
+                                                    <li><a href="#" class="retail4">Bridal Store</a></li>
+                                                    <li><a href="#" class="retail5">Cake Shop</a></li>
+                                                    <li><a href="#" class="retail6">Cartridge Refilling Store</a></li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-md-4 ht-ul">
+                                                <h4>Chemical Industry</h4>
+                                                <ul class="nav-list list-inline">
+                                                    <li><a href="#" class="retail2">Auto Accessories Store</a></li>
+                                                    <li><a href="#" class="retail4">Bridal Store</a></li>
+                                                    <li><a href="#" class="retail5">Cake Shop</a></li>
+                                                    <li><a href="#" class="retail6">Cartridge Refilling Store</a></li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-md-4 ht-ul">
+                                                <h4>Chemical Industry</h4>
+                                                <ul class="nav-list list-inline">
+                                                    <li><a href="#" class="retail2">Auto Accessories Store</a></li>
+                                                    <li><a href="#" class="retail4">Bridal Store</a></li>
+                                                    <li><a href="#" class="retail5">Cake Shop</a></li>
+                                                    <li><a href="#" class="retail6">Cartridge Refilling Store</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane" id="other">
+                                          <div class="col-md-4 ht-ul">
+                                                <h4>Chemical Industry</h4>
+                                                <ul class="nav-list list-inline">
+                                                    <li><a href="#" class="retail2">Auto Accessories Store</a></li>
+                                                    <li><a href="#" class="retail4">Bridal Store</a></li>
+                                                    <li><a href="#" class="retail5">Cake Shop</a></li>
+                                                    <li><a href="#" class="retail6">Cartridge Refilling Store</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Nav tabs -->
+                        </div>
+                    </li>
+                </ul>
+                <form class="navbar-form navbar-left" role="search">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search">
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">Link</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
-          </div>
-        </li>
-
-        <!-- Standalone Pages -->
-        <li class="menu-item"><a href="frontend/html/about.html" class="menu-link">About</a></li>
-        <li class="menu-item"><a href="frontend/html/blog.html" class="menu-link">Blog</a></li>
-        <li class="menu-item"><a href="frontend/html/contact.html" class="menu-link">Contact</a></li>
-        <li class="menu-item"><a href="frontend/html/dashboard.html" class="menu-link">Dashboard</a></li>
-        <li class="menu-item"><a href="frontend/html/TRAINER-ABID.html" class="menu-link">Trainer Abid</a></li>
-        <!-- Auth Pages -->
-        <li class="menu-item"><a href="frontend/html/signin.html" class="menu-link">Sign In</a></li>
-        <li class="menu-item"><a href="frontend/html/signup.html" class="menu-link">Sign Up</a></li>
-    
-      </ul>
-    </div>
-  </nav>
-</header>
-
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+   
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/mega-custom2.js"></script>
 </body>
+
 </html>
