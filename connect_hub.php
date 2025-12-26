@@ -1,86 +1,44 @@
-<?php
-// --- MASTER ACCESS HEADERS (SOVEREIGN SECURITY) ---
-header("Access-Control-Allow-Origin: *"); 
-header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With");
-header("Content-Type: application/json");
+// --- GATE 5: PASSWORD RECOVERY STRIKE ---
 
-if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
-    http_response_code(200);
-    exit;
-}
-
-// --- ORACLE 23ai VAULT CONNECTION ---
-$username = "ADMIN"; 
-$password = "BiSMILLAh7&"; 
-$connection_string = "23ai_34ui2_high"; 
-
-$conn = oci_connect($username, $password, $connection_string);
-
-if (!$conn) {
-    $e = oci_error();
-    echo json_encode(["success" => false, "message" => "Oracle Vault Connection Failed"]);
-    exit;
-}
-
-// CAPTURING THE GITHUB STRIKE
-$data = json_decode(file_get_contents("php://input"), true);
-
-if ($data) {
-    // --- STRIKE 1: SIGNUP (From signup.html) ---
-    if (isset($data['full_name']) && !isset($data['message'])) {
-        $sql = "INSERT INTO AK_HUB_VAULT (full_name, email, password, whatsapp_no, father_name, monthly_income, preferred_timing, location, department, user_role) 
-                VALUES (:fn, :em, :pw, :wa, :ft, :inc, :tim, :loc, :dept, :role)";
-        $stmt = oci_parse($conn, $sql);
-        oci_bind_by_name($stmt, ':fn', $data['full_name']);
-        oci_bind_by_name($stmt, ':em', $data['email']);
-        oci_bind_by_name($stmt, ':pw', $data['password']);
-        oci_bind_by_name($stmt, ':wa', $data['whatsapp_no']);
-        oci_bind_by_name($stmt, ':ft', $data['father_name']);
-        oci_bind_by_name($stmt, ':inc', $data['monthly_income']);
-        oci_bind_by_name($stmt, ':tim', $data['preferred_timing']);
-        oci_bind_by_name($stmt, ':loc', $data['location']);
-        oci_bind_by_name($stmt, ':dept', $data['department']);
-        oci_bind_by_name($stmt, ':role', $data['user_role']);
-    } 
+// ACTION A: SENDING THE CODE
+if (isset($data['action']) && $data['action'] == 'send_otp') {
+    $otp = rand(100000, 999999); // Tremendous 6-digit code
+    $sql = "INSERT INTO AK_OTP_VAULT (user_email, otp_code) VALUES (:em, :otp)";
+    $stmt = oci_parse($conn, $sql);
+    oci_bind_by_name($stmt, ':em', $data['email']);
+    oci_bind_by_name($stmt, ':otp', $otp);
     
-    // --- STRIKE 2: CONTACT (From contact.html) ---
-    else if (isset($data['message'])) {
-        $sql = "INSERT INTO AK_HUB_MESSAGES (sender_name, sender_email, sender_phone, message_text) 
-                VALUES (:nm, :em, :ph, :msg)";
-        $stmt = oci_parse($conn, $sql);
-        oci_bind_by_name($stmt, ':nm', $data['name']);
-        oci_bind_by_name($stmt, ':em', $data['email']);
-        oci_bind_by_name($stmt, ':ph', $data['number']);
-        oci_bind_by_name($stmt, ':msg', $data['message']);
+    if (oci_execute($stmt)) {
+        // In a live system, here you would trigger the SMTP Mail or SMS strike
+        echo json_encode(["success" => true, "message" => "OTP Sent to Vault", "debug_otp" => $otp]);
     }
-
-    // --- STRIKE 3: LOGIN (From signin.html) ---
-    else if (isset($data['email']) && isset($data['password'])) {
-        $sql = "SELECT FULL_NAME, USER_ROLE FROM AK_HUB_VAULT WHERE EMAIL = :em AND PASSWORD = :pw";
-        $stmt = oci_parse($conn, $sql);
-        oci_bind_by_name($stmt, ':em', $data['email']);
-        oci_bind_by_name($stmt, ':pw', $data['password']);
-    }
-
-    $result = oci_execute($stmt);
-
-    if ($result) {
-        if (isset($data['email']) && isset($data['password']) && !isset($data['full_name'])) {
-            $row = oci_fetch_array($stmt, OCI_ASSOC);
-            if ($row) {
-                echo json_encode(["success" => true, "user" => ["full_name" => $row['FULL_NAME'], "role" => $row['USER_ROLE']]]);
-            } else {
-                echo json_encode(["success" => false, "message" => "Invalid Credentials"]);
-            }
-        } else {
-            echo json_encode(["success" => true, "message" => "Vault Updated Successfully"]);
-        }
-    } else {
-        echo json_encode(["success" => false, "message" => "Vault Execution Error"]);
-    }
-    oci_free_statement($stmt);
 }
 
-oci_close($conn);
-?>
+// ACTION B: VERIFY & RESET
+if (isset($data['action']) && $data['action'] == 'reset_password') {
+    // Check if OTP is valid and not expired
+    $sql = "SELECT * FROM AK_OTP_VAULT 
+            WHERE user_email = :em AND otp_code = :otp AND is_used = 0 
+            AND expiry > CURRENT_TIMESTAMP";
+    
+    $stmt = oci_parse($conn, $sql);
+    oci_bind_by_name($stmt, ':em', $data['email']);
+    oci_bind_by_name($stmt, ':otp', $data['otp']);
+    oci_execute($stmt);
+
+    if (oci_fetch($stmt)) {
+        // OTP Valid! Now perform the Password Strike
+        $updateSql = "UPDATE AK_HUB_VAULT SET password = :pw WHERE email = :em";
+        $updStmt = oci_parse($conn, $updateSql);
+        oci_bind_by_name($updStmt, ':pw', $data['new_password']);
+        oci_bind_by_name($updStmt, ':em', $data['email']);
+        oci_execute($updStmt);
+        
+        // Burn the OTP so it cannot be used again
+        oci_execute(oci_parse($conn, "UPDATE AK_OTP_VAULT SET is_used = 1 WHERE user_email = '".$data['email']."'"));
+        
+        echo json_encode(["success" => true, "message" => "Password Re-Established!"]);
+    } else {
+        echo json_encode(["success" => false, "message" => "Invalid or Expired OTP Strike."]);
+    }
+}
