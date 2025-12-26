@@ -255,39 +255,13 @@
             user_role: document.getElementById('role').value
         };
 
-    try {
+        try {
             // THE CLOUD STRIKE (Pointing to your FreeSQL PHP Sentinel)
-            // Replace 'YOUR_FREESQL_DOMAIN' with your actual hosting URL found in your dashboard
-            const response = await fetch('https://YOUR_FREESQL_DOMAIN/connect_hub.php', {
+            const response = await fetch('https://freesql.com/connect_hub.php', {
                 method: 'POST',
-                mode: 'cors', // Crucial: Allows the Hub to strike from GitHub to Oracle
-                headers: { 
-                    'Content-Type': 'application/json',
-                    'X-Hub-Origin': 'AbidKhanHub-Global' 
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(masterData)
             });
-
-            // Capturing the Pulse from the Oracle Vault
-            const result = await response.json();
-
-            if (result.success) {
-                // THE TREMENDOUS MESSAGE STRATEGY
-                const welcomeMsg = `Assalamu Alaikum ${masterData.full_name}! Welcome to Abid Khan Hub. We have received your application for ${masterData.department} Excellence.`;
-                const waUrl = `https://wa.me/${masterData.whatsapp_no.replace(/\D/g,'')}?text=${encodeURIComponent(welcomeMsg)}`;
-                
-                alert("Vault Updated! Your Profile is now Live in the Oracle 23ai Cloud.");
-                
-                // Open WhatsApp Welcome and then Redirect to Student Dashboard
-                window.open(waUrl, '_blank');
-                window.location.href = 'dashboard.html';
-            } else {
-                alert("Vault Refusal: " + result.message);
-            }
-        } catch (error) {
-            console.error("Strike Failed:", error);
-            alert("Sentinel Offline: The connection to the Oracle Vault was interrupted. Check your FreeSQL Domain link.");
-        }
 
             const result = await response.json();
 
