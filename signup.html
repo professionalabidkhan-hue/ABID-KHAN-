@@ -188,8 +188,7 @@
                         </select>
                     </div>
                 </div>
-
-                <button type="submit" class="btn-submit-hub">Activate My Hub Profile</button>
+<button type="button" id="activate-btn" class="btn-submit-hub">Activate My Hub Profile</button>
             </form>
         </div>
 
@@ -221,113 +220,63 @@
     </div>
 </div>
 
-</body>
 <script>
-    /**
-     * MASTER ARCHITECT: ABID KHAN
-     * PURPOSE: Sovereign Identity Registration & Oracle 19c Integration
-     */
+    // --- THE SOVEREIGN TRACE ---
+    console.log("SENTINEL: Mastery Script Loaded and Ready.");
 
-    // --- SECTION 1: DYNAMIC IDENTITY PREVIEW ---
-    // Updates the Virtual ID Card in real-time to show the student's growing honor
-    const inputMap = {
-        'name': 'preview-name',
-        'location': 'preview-location',
-    };
+    // IDENTITY PREVIEW UPDATERS
+    document.getElementById('name').oninput = (e) => document.getElementById('preview-name').innerText = e.target.value || "Member Name";
+    document.getElementById('location').oninput = (e) => document.getElementById('preview-location').innerText = e.target.value || "---";
+    document.getElementById('course').onchange = (e) => document.getElementById('preview-course').innerText = e.target.options[e.target.selectedIndex].text;
 
-    Object.keys(inputMap).forEach(id => {
-        document.getElementById(id).addEventListener('input', (e) => {
-            document.getElementById(inputMap[id]).innerText = e.target.value || (id === 'name' ? "Member Name" : "---");
-        });
-    });
-
-    document.getElementById('course').addEventListener('change', (e) => {
-        const text = e.target.options[e.target.selectedIndex].text;
-        document.getElementById('preview-course').innerText = text;
-    });
-
-    document.getElementById('role').addEventListener('change', (e) => {
-        const roleDisplay = document.getElementById('preview-role');
-        roleDisplay.innerText = e.target.value === 'teach' ? "Expert Trainer" : "Future Member";
-        roleDisplay.style.color = e.target.value === 'teach' ? "#4fc3f7" : "#0dcaf0";
-    });
-
-
-    // --- SECTION 2: THE SOVEREIGN SIGNUP STRIKE ---
-    async function signupStrike(event) {
-        // Prevent the "Silent Reload" (The ? at the end of the URL)
-        if (event) event.preventDefault();
+    // THE MASTER STRIKE
+    document.getElementById('activate-btn').onclick = async function() {
+        console.log("STRIKE: Button has been pressed by the Visionary.");
         
-        console.log("SENTINEL: Strike Initialized by Master Abid Khan...");
-
-        // Gather data from the High-Authority UI
         const signupData = {
-            action: 'signup',
-            full_name: document.getElementById('name').value.trim(),
-            email: document.getElementById('email').value.trim(),
+            full_name: document.getElementById('name').value,
+            email: document.getElementById('email').value,
             password: document.getElementById('password').value,
-            whatsapp_no: document.getElementById('phone').value.trim(),
-            father_name: document.getElementById('father_name').value.trim(),
-            monthly_income: document.getElementById('monthly_income').value.trim(),
-            preferred_timing: document.getElementById('preferred_timing').value.trim(),
-            location: document.getElementById('location').value.trim(),
+            whatsapp_no: document.getElementById('phone').value,
+            father_name: document.getElementById('father_name').value,
+            monthly_income: document.getElementById('monthly_income').value,
+            preferred_timing: document.getElementById('preferred_timing').value,
+            location: document.getElementById('location').value,
             department: document.getElementById('course').value,
             role: document.getElementById('role').value
         };
 
-        // Validate the Entrance
-        if (!signupData.full_name || !signupData.email || !signupData.password) {
-            alert("SENTINEL NOTICE: Name, Email, and Password are required for Vault entry.");
+        if(!signupData.email || !signupData.password) {
+            alert("SENTINEL: Email and Password are required.");
             return;
         }
 
-        // Visual Feedback for the Founder
-        const submitBtn = document.querySelector('.btn-submit-hub');
-        const originalText = submitBtn.innerText;
-        submitBtn.innerText = "SECURING IDENTITY...";
-        submitBtn.disabled = true;
+        alert("COMMAND RECEIVED: Attempting Vault Entry...");
+        console.log("DATA COLLECTED:", signupData);
 
         try {
-            // THE STRIKE TO THE ORACLE 19c BRIDGE
-            // NOTE: Ensure your PHP server supports HTTPS for GitHub compatibility
+            // !!! REPLACE THE URL BELOW WITH YOUR ACTUAL PHP URL !!!
             const response = await fetch('https://your-freesql-domain.com/connect_hub.php', {
                 method: 'POST',
-                headers: { 
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(signupData)
             });
 
-            if (!response.ok) throw new Error("Server communication failure.");
-
             const result = await response.json();
-
-            if (result.success) {
-                alert("TREMENDOUS SUCCESS: Your Identity has been sealed in the Oracle Vault!");
-                // Clear Security Shadow and Proceed
-                window.location.href = 'signin.html';
-            } else {
-                alert("VAULT REJECTION: " + (result.message || "Unknown error occurred."));
-            }
+            alert("SERVER RESPONSE: " + result.message);
+            
+            if(result.success) window.location.href = 'signin.html';
+            
         } catch (error) {
-            console.error("Mastery Error Log:", error);
-            alert("SENTINEL OFFLINE: The Bridge is blocked. Check HTTPS/CORS or Server Status.");
-        } finally {
-            submitBtn.innerText = originalText;
-            submitBtn.disabled = false;
+            console.error("STRIKE ERROR:", error);
+            alert("SENTINEL NOTICE: Check Console. The Bridge is likely blocked by HTTPS/CORS.");
         }
-    }
-
-    // --- SECTION 3: PROTOCOL BINDING ---
-    // Ensures the button obeys the script and not the default browser behavior
-    document.addEventListener('DOMContentLoaded', () => {
-        const form = document.getElementById('master-signup');
-        const btn = document.querySelector('.btn-submit-hub');
-
-        // Capture both the click and the "Enter" key strike
-        form.addEventListener('submit', signupStrike);
-        btn.type = "submit"; // Re-enable submit type now that preventDefault is active
-    });
+    };
 </script>
+</body>
 </html>
+              
+ 
+
+          
+
