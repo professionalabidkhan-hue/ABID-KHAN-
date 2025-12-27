@@ -224,14 +224,15 @@
     // --- THE SOVEREIGN TRACE ---
     console.log("SENTINEL: Mastery Script Loaded and Ready.");
 
-    // IDENTITY PREVIEW UPDATERS
+    // IDENTITY PREVIEW UPDATERS (Real-time synchronization)
     document.getElementById('name').oninput = (e) => document.getElementById('preview-name').innerText = e.target.value || "Member Name";
     document.getElementById('location').oninput = (e) => document.getElementById('preview-location').innerText = e.target.value || "---";
     document.getElementById('course').onchange = (e) => document.getElementById('preview-course').innerText = e.target.options[e.target.selectedIndex].text;
 
-    // THE MASTER STRIKE
-    document.getElementById('activate-btn').onclick = async function() {
-        console.log("STRIKE: Button has been pressed by the Visionary.");
+    // THE MASTER STRIKE (Triggered by the SignUp Button)
+    // Ensure your HTML button looks like: <button type="button" id="SignUp" ...>
+    document.getElementById('SignUp').onclick = async function() {
+        console.log("STRIKE: Visionary initiated the SignUp Protocol.");
         
         const signupData = {
             full_name: document.getElementById('name').value,
@@ -246,30 +247,42 @@
             role: document.getElementById('role').value
         };
 
+        // VALIDAITON: The First Shield
         if(!signupData.email || !signupData.password) {
-            alert("SENTINEL: Email and Password are required.");
+            alert("SENTINEL: Email and Password are required to enter the Vault.");
             return;
         }
 
         alert("COMMAND RECEIVED: Attempting Vault Entry...");
-        console.log("DATA COLLECTED:", signupData);
+        console.log("DATA COLLECTED FOR VAULT:", signupData);
 
         try {
-            // !!! REPLACE THE URL BELOW WITH YOUR ACTUAL PHP URL !!!
-            const response = await fetch('https://your-freesql-domain.com/connect_hub.php', {
+            // --- THE SOVEREIGN BRIDGE (CRUSHING THE CORS BLOCK) ---
+            // Using './' ensures the browser looks in your local folder for the PHP
+            const response = await fetch('./connect_hub.php', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json' 
+                },
                 body: JSON.stringify(signupData)
             });
+
+            // Audit the Server Response
+            if (!response.ok) throw new Error('Sentinel: Network Response was not successful.');
 
             const result = await response.json();
             alert("SERVER RESPONSE: " + result.message);
             
-            if(result.success) window.location.href = 'signin.html';
+            if(result.success) {
+                console.log("VAULT ENTRY SECURED. Redirecting to Gateway Sign-In...");
+                window.location.href = 'signin.html';
+            }
             
         } catch (error) {
             console.error("STRIKE ERROR:", error);
-            alert("SENTINEL NOTICE: Check Console. The Bridge is likely blocked by HTTPS/CORS.");
+            // This is where the Red Text originates. 
+            alert("SENTINEL NOTICE: Check Console. Ensure you are using http://localhost and NOT file:///");
         }
     };
 </script>
@@ -279,5 +292,6 @@
  
 
           
+
 
 
