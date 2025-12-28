@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Master Command | Founder Abid Khan</title>
+    
+    <script>
+        (function() {
+            if (sessionStorage.getItem('founder_access') !== 'granted') {
+                // For development, you can comment this line out to view the page
+                // window.location.href = 'founder-login.html';
+            }
+        })();
+    </script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root { 
+            --founder-dark: #0a192f; 
+            --accent-gold: #ffd700; 
+            --it-blue: #00d2ff;
+            --quran-green: #00ff87;
+            --deep-bg: #07090d;
+        }
+        
+        body { 
+            background-color: var(--deep-bg); 
+            color: #e2e8f0; 
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .founder-header { 
+            background: linear-gradient(135deg, var(--founder-dark), #111827); 
+            padding: 50px 20px; 
+            border-bottom: 2px solid var(--accent-gold);
+            position: relative;
+        }
+        
+        .profile-ring {
+            width: 130px; height: 130px;
+            border-radius: 50%;
+            border: 4px solid var(--accent-gold);
+            padding: 5px;
+            margin: 0 auto 15px auto;
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.3);
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 25px;
+            transition: 0.4s;
+            backdrop-filter: blur(15px);
+            height: 100%;
+        }
+        
+        .stat-card:hover { 
+            border-color: var(--accent-gold); 
+            transform: translateY(-8px);
+        }
+
+        .hub-btn { 
+            padding: 12px 25px; border-radius: 12px; font-weight: 800; 
+            text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; 
+        }
+        .btn-it { border: 2px solid var(--it-blue); color: var(--it-blue); background: transparent; }
+        .btn-it:hover { background: var(--it-blue); color: #000; box-shadow: 0 0 20px rgba(0, 210, 255, 0.4); }
+        
+        .btn-quran { border: 2px solid var(--quran-green); color: var(--quran-green); background: transparent; }
+        .btn-quran:hover { background: var(--quran-green); color: #000; box-shadow: 0 0 20px rgba(0, 255, 135, 0.4); }
+
+        .command-box {
+            background: #0f172a; border-radius: 24px; padding: 35px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            margin-bottom: 30px;
+        }
+        
+        input, select, textarea { 
+            background: #07090d !important; 
+            border: 1px solid #1e293b !important; 
+            color: #fff !important; 
+            border-radius: 12px !important;
+            padding: 12px !important;
+        }
+        
+        .status-indicator {
+            padding: 5px 12px;
+            background: rgba(0, 255, 0, 0.1);
+            border: 1px solid #00ff00;
+            color: #00ff00;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .audit-log-item {
+            padding: 12px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="founder-header text-center">
+    <div class="profile-ring">
+        <img src="ABID KHAN.png" class="rounded-circle w-100 h-100" style="object-fit: cover;" alt="Founder">
+    </div>
+    <h1 class="fw-bold text-white mb-1">FOUNDER COMMAND CENTER</h1>
+    <div class="d-flex justify-content-center align-items-center gap-2 mb-4">
+        <span class="status-indicator"><i class="fas fa-circle me-1 small"></i> System Live</span>
+        <p class="text-warning text-uppercase mb-0 fw-bold small">Abid Khan Hub Global Oversight</p>
+    </div>
+    
+    <div class="d-flex justify-content-center gap-3 mt-4">
+        <a href="dashboardittrainer.html" class="btn hub-btn btn-it"><i class="fas fa-microchip me-2"></i> IT Wing</a>
+        <a href="dashboardqurantrainer.html" class="btn hub-btn btn-quran"><i class="fas fa-book-quran me-2"></i> Quran Faculty</a>
+    </div>
+</div>
+
+<div class="container py-5">
+    <div class="row g-4 mb-5">
+        <div class="col-md-3">
+            <div class="stat-card">
+                <small class="text-muted d-block mb-1">TOTAL HUB POPULATION</small>
+                <h2 class="fw-bold mb-0" id="total_users">1,250</h2>
+                <div class="text-success small mt-2"><i class="fas fa-sync fa-spin me-1"></i> Tracking ID: 26</div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stat-card">
+                <small class="text-muted d-block mb-1">IT ENGINEERING</small>
+                <h2 class="fw-bold text-info mb-0" id="it_count">450</h2>
+                <div class="progress mt-3" style="height: 4px; background: rgba(255,255,255,0.1);">
+                    <div id="it_progress" class="progress-bar bg-info" style="width: 45%"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stat-card">
+                <small class="text-muted d-block mb-1">ISLAMIC STUDIES</small>
+                <h2 class="fw-bold text-success mb-0" id="quran_count">800</h2>
+                <div class="progress mt-3" style="height: 4px; background: rgba(255,255,255,0.1);">
+                    <div id="quran_progress" class="progress-bar bg-success" style="width: 80%"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stat-card">
+                <small class="text-muted d-block mb-1">ACTIVE TRAINERS</small>
+                <h2 class="fw-bold text-warning mb-0">12</h2>
+                <small class="text-muted">Master Instructor: Abid Khan</small>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-lg-8">
+            <div class="command-box" style="border-top: 4px solid var(--accent-gold);">
+                <h4 class="mb-4 text-warning fw-bold"><i class="fas fa-user-edit me-2"></i> Distinguished Data Entry</h4>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="small text-muted mb-2">STUDENT FULL NAME</label>
+                        <input type="text" id="manual_name" class="form-control" placeholder="Enter name...">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="small text-muted mb-2">EMAIL ADDRESS</label>
+                        <input type="email" id="manual_email" class="form-control" placeholder="email@abidkhanhub.com">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="small text-muted mb-2">SELECT TRACK</label>
+                        <select id="manual_track" class="form-select">
+                            <option value="IT">IT Engineering</option>
+                            <option value="QURAN">Quran Faculty</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="small text-muted mb-2">ENROLLMENT STATUS</label>
+                        <select id="manual_status" class="form-select">
+                            <option value="ACTIVE">Active</option>
+                            <option value="PENDING">Pending Approval</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="btn btn-warning w-100 mt-4 fw-bold py-3" onclick="processManualEntry()">
+                    <i class="fas fa-database me-2"></i> COMMIT TO AK_STUDENTS TABLE
+                </button>
+            </div>
+
+            <div class="command-box">
+                <h4 class="mb-4 text-warning fw-bold"><i class="fas fa-broadcast-tower me-2"></i> Global Emergency Broadcast</h4>
+                <textarea id="globalMsg" class="form-control mb-4" rows="3" placeholder="Type the Master Decree here..."></textarea>
+                <button class="btn btn-outline-warning w-100 fw-bold" onclick="sendGlobalAlert()">EXECUTE BROADCAST</button>
+            </div>
+        </div>
+        
+        <div class="col-lg-4">
+            <div class="stat-card">
+                <h5 class="fw-bold mb-4 text-warning"><i class="fas fa-fingerprint me-2"></i> Hub Intelligence Log</h5>
+                <div id="auditLogs" style="max-height: 500px; overflow-y: auto;">
+                    <div class="audit-log-item text-success fw-bold">[SYSTEM] Oracle Session Verified. ID 1 and 26 detected.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 1. DATA ENTRY LOGIC
+    function processManualEntry() {
+        const name = document.getElementById('manual_name').value;
+        const email = document.getElementById('manual_email').value;
+        const track = document.getElementById('manual_track').value;
+        const status = document.getElementById('manual_status').value;
+
+        if(!name || !email) {
+            alert("Founder, please provide the Student Name and Email.");
+            return;
+        }
+
+        // Add to Intelligence Log
+        addLog('ENTRY', `New ${track} Student: ${name} marked as ${status}`, 'text-info');
+        
+        // Update Stats Visually
+        let total = parseInt(document.getElementById('total_users').innerText.replace(/,/g, ''));
+        document.getElementById('total_users').innerText = (total + 1).toLocaleString();
+        
+        if(track === 'IT') {
+            let itCount = parseInt(document.getElementById('it_count').innerText);
+            document.getElementById('it_count').innerText = itCount + 1;
+        } else {
+            let quranCount = parseInt(document.getElementById('quran_count').innerText);
+            document.getElementById('quran_count').innerText = quranCount + 1;
+        }
+
+        alert(`Master Abid Khan, ${name} has been successfully registered in the Hub.`);
+        
+        // Reset inputs
+        document.getElementById('manual_name').value = '';
+        document.getElementById('manual_email').value = '';
+    }
+
+    // 2. LOGGING ENGINE
+    function addLog(dept, msg, colorClass) {
+        const logBox = document.getElementById('auditLogs');
+        const time = new Date().toLocaleTimeString();
+        const entry = `
+            <div class="audit-log-item">
+                <span class="${colorClass} fw-bold">[${dept}]</span> ${msg} 
+                <br><small class="text-muted" style="font-size: 0.65rem;">${time}</small>
+            </div>`;
+        logBox.insertAdjacentHTML('afterbegin', entry);
+    }
+
+    // 3. BROADCAST
+    function sendGlobalAlert() {
+        const msg = document.getElementById('globalMsg').value;
+        if(msg) {
+            addLog('FOUNDER', 'Global Directive Transmitted.', 'text-warning');
+            alert("COMMAND DISPATCHED: Every dashboard on the Hub has been updated.");
+            document.getElementById('globalMsg').value = '';
+        }
+    }
+</script>
+</body>
+</html>

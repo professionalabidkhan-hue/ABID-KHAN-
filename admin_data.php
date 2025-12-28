@@ -1,36 +1,22 @@
 <?php
-// --- FOUNDER ANALYTICS HEADERS ---
-header("Access-Control-Allow-Origin: *");
+// --- FOUNDER ANALYTICS (MySQL VERSION) ---
 header("Content-Type: application/json");
+session_start();
 
-$username = "ADMIN"; 
-$password = "BiSMILLAh7&"; 
-$connection_string = "23ai_34ui2_high"; 
+$conn = new mysqli("localhost", "root", "", "abid_khan_e_learning_hub");
 
-$conn = oci_connect($username, $password, $connection_string);
-
-// THE MASTER SUMMARIES
 $analytics = [];
 
-// 1. Total Student Count
-$s1 = oci_parse($conn, "SELECT COUNT(*) AS TOTAL FROM AK_HUB_VAULT");
-oci_execute($s1);
-$analytics['total_members'] = oci_fetch_array($s1, OCI_ASSOC)['TOTAL'];
+// 1. Total Members from your 'members' table
+$res1 = $conn->query("SELECT COUNT(*) AS TOTAL FROM members");
+$analytics['total_members'] = $res1->fetch_assoc()['TOTAL'];
 
-// 2. Department Breakdown (AI, Web, Python, etc.)
-$s2 = oci_parse($conn, "SELECT DEPARTMENT, COUNT(*) AS COUNT FROM AK_HUB_VAULT GROUP BY DEPARTMENT");
-oci_execute($s2);
-while ($row = oci_fetch_array($s2, OCI_ASSOC)) {
-    $analytics['departments'][] = $row;
-}
-
-// 3. Global Location Strike
-$s3 = oci_parse($conn, "SELECT LOCATION, COUNT(*) AS COUNT FROM AK_HUB_VAULT GROUP BY LOCATION");
-oci_execute($s3);
-while ($row = oci_fetch_array($s3, OCI_ASSOC)) {
-    $analytics['locations'][] = $row;
+// 2. Role Breakdown from 'users' table
+$res2 = $conn->query("SELECT role, COUNT(*) AS COUNT FROM users GROUP BY role");
+while ($row = $res2->fetch_assoc()) {
+    $analytics['roles'][] = $row;
 }
 
 echo json_encode($analytics);
-oci_close($conn);
+$conn->close();
 ?>

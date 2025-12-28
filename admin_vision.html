@@ -2,122 +2,92 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Admin Vision | Abid Khan Hub</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inner Sanctum | Abid Khan Hub</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
-        body { background: #07090d; color: white; padding: 40px; }
-        .vision-container { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 30px; }
-        .table { color: #4fc3f7; }
-        .master-header { border-bottom: 2px solid #4fc3f7; padding-bottom: 10px; margin-bottom: 30px; }
+        :root { --primary-blue: #4fc3f7; --dark-bg: #07090d; --border: rgba(255, 255, 255, 0.1); }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #07090d; color: #fff; min-height: 100vh; }
+        .sidebar { background: rgba(13, 17, 23, 0.9); border-right: 1px solid var(--border); min-height: 100vh; padding: 30px; }
+        .main-content { padding: 50px; }
+        .stat-card { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 20px; padding: 25px; transition: 0.3s; }
+        .stat-card:hover { border-color: var(--primary-blue); background: rgba(79, 195, 247, 0.05); }
+        .welcome-text { font-weight: 800; font-size: 2.5rem; letter-spacing: -1px; }
     </style>
 </head>
 <body>
-<div style="margin-bottom: 20px;">
-    <input type="text" id="vaultSearch" placeholder="Search by Name, Email or Location..." 
-           onkeyup="searchVault(this.value)" 
-           style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ddd; font-size: 16px;">
-</div>
-   <div style="display: flex; gap: 20px; margin-bottom: 30px;">
-    <div class="card" style="background: #007BFF; color: white; padding: 20px; border-radius: 10px; flex: 1;">
-        <h3>Total Members</h3>
-        <h2 id="stat-total">0</h2>
-    </div>
-    <div class="card" style="background: #28a745; color: white; padding: 20px; border-radius: 10px; flex: 1;">
-        <h3>Active Courses</h3>
-        <h2 id="stat-dept">0</h2>
-    </div>
-    <div class="card" style="background: #ffc107; color: white; padding: 20px; border-radius: 10px; flex: 1;">
-        <h3>Global Locations</h3>
-        <h2 id="stat-loc">0</h2>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3 sidebar d-none d-md-block">
+            <img src="ABID KHAN.png" width="50" class="mb-4">
+            <h5 class="fw-bold text-info mb-4">COMMAND CENTER</h5>
+            <nav class="nav flex-column">
+                <a class="nav-link text-white mb-2" href="#"><i class="fas fa-home me-2"></i> My Identity</a>
+                <a class="nav-link text-secondary mb-2" href="#"><i class="fas fa-book me-2"></i> IT Engineering</a>
+                <a class="nav-link text-secondary mb-2" href="#"><i class="fas fa-quran me-2"></i> Islamic Studies</a>
+                <hr class="border-secondary">
+                <a class="nav-link text-danger" href="logout.php">Logout</a>
+            </nav>
+        </div>
+
+        <div class="col-md-9 main-content">
+            <div class="d-flex justify-content-between align-items-center mb-5">
+                <div>
+                    <h1 class="welcome-text">Welcome, <span id="user-name" class="text-info">Master</span></h1>
+                    <p class="text-secondary">Your profile is active in the Abid Khan Hub Vault.</p>
+                </div>
+                <div class="stat-card text-center">
+                    <small class="text-secondary d-block">STATUS</small>
+                    <span class="badge bg-info text-dark">CERTIFIED MEMBER</span>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="stat-card">
+                        <small class="text-info uppercase fw-bold">Department</small>
+                        <h4 id="user-dept" class="mt-2">---</h4>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stat-card">
+                        <small class="text-info uppercase fw-bold">Member Role</small>
+                        <h4 id="user-role" class="mt-2">---</h4>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stat-card">
+                        <small class="text-info uppercase fw-bold">Location</small>
+                        <h4 id="user-loc" class="mt-2">---</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
 <script>
-    // --- MASTER DATA CACHE ---
-    let masterStudentData = [];
-
-    // --- PART 1: THE VISIONARY DATA STREAM ---
-    async function loadStudentVault() {
-        const tableBody = document.getElementById('student-table-body');
-        const countDisplay = document.getElementById('stat-total'); // Links to your Vision Cards
-        
+    // AUTOMATIC IDENTITY RETRIEVAL
+    async function loadIdentity() {
         try {
-            // STRIKING THE ORACLE BRIDGE
-            const response = await fetch('https://your-freesql-domain.com/admin_data.php');
-            masterStudentData = await response.json();
-
-            renderTable(masterStudentData);
+            const res = await fetch('./get_member_data.php');
+            const result = await res.json();
             
-            // Update the Founder's Analytics Counter
-            if(countDisplay) countDisplay.innerText = masterStudentData.length;
-            
-            console.log("SENTINEL: Vault Data Stream Complete. Total Members: " + masterStudentData.length);
-        } catch (error) {
-            console.error("Vision Error:", error);
-            tableBody.innerHTML = '<tr><td colspan="7" style="color:red; text-align:center;">Sentinel Error: Data unreachable from Vault.</td></tr>';
+            if(result.success) {
+                document.getElementById('user-name').innerText = result.data.full_name;
+                document.getElementById('user-dept').innerText = result.data.department;
+                document.getElementById('user-role').innerText = result.data.role;
+                document.getElementById('user-loc').innerText = result.data.location;
+            } else {
+                window.location.href = 'signin.html';
+            }
+        } catch (err) {
+            console.error("Identity retrieval failed.");
         }
     }
-
-    // --- PART 2: THE RENDERING ENGINE (MASTERY CODE) ---
-    function renderTable(dataList) {
-        const tableBody = document.getElementById('student-table-body');
-        tableBody.innerHTML = ''; 
-
-        dataList.forEach(student => {
-            const row = `
-                <tr>
-                    <td>#${student.ID}</td>
-                    <td><strong>${student.FULL_NAME}</strong></td>
-                    <td>${student.EMAIL}</td>
-                    <td><a href="https://wa.me/${student.WHATSAPP_NO}" target="_blank" style="color:green; text-decoration:none;">📞 ${student.WHATSAPP_NO}</a></td>
-                    <td><span class="badge" style="background:#eee; padding:5px; border-radius:4px;">${student.DEPARTMENT}</span></td>
-                    <td><span class="location-tag" style="background:#007BFF; color:white; padding:3px 8px; border-radius:12px; font-size:0.8em;">${student.LOCATION}</span></td>
-                    <td>${new Date(student.CREATED_AT).toLocaleDateString('en-GB')}</td>
-                </tr>
-            `;
-            tableBody.innerHTML += row;
-        });
-    }
-
-    // --- PART 3: INSTANT SEARCH STRIKE (THE MASTER'S GRIP) ---
-    function searchVault(query) {
-        const filtered = masterStudentData.filter(student => 
-            student.FULL_NAME.toLowerCase().includes(query.toLowerCase()) ||
-            student.EMAIL.toLowerCase().includes(query.toLowerCase()) ||
-            student.LOCATION.toLowerCase().includes(query.toLowerCase())
-        );
-        renderTable(filtered);
-    }
-
-    // --- PART 4: YOUR TREMENDOUS EXCEL EXPORT (CALIBRATED) ---
-    function exportToExcel() {
-        let table = document.querySelector("table");
-        let rows = Array.from(table.rows);
-        
-        if (rows.length <= 1) {
-            alert("SENTINEL: No data available in the Vault to export.");
-            return;
-        }
-
-        let csvContent = rows.map(row => {
-            let cols = Array.from(row.cells).map(cell => `"${cell.innerText.replace(/"/g, '""')}"`);
-            return cols.join(",");
-        }).join("\n");
-
-        let blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-        let link = document.createElement("a");
-        let url = URL.createObjectURL(blob);
-        
-        link.setAttribute("href", url);
-        link.setAttribute("download", "Abid_Hub_Master_List_" + new Date().toISOString().split('T')[0] + ".csv");
-        link.style.visibility = 'hidden';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    }
-
-    // INITIALIZE ON LOAD
-    window.onload = loadStudentVault;
+    window.onload = loadIdentity;
 </script>
 
 </body>

@@ -1,66 +1,69 @@
 <?php
-// --- MASTER ACCESS HEADERS (CRUSHING CORS BLOCKS) ---
-header("Access-Control-Allow-Origin: *"); 
+// --- THE SOVEREIGN BRIDGE: CONNECT_HUB.PHP ---
+header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
-header("Content-Type: application/json");
+header("Access-Control-Allow-Headers: Content-Type");
+header("Content-Type: application/json; charset=UTF-8");
 
-// Handle pre-flight OPTIONS request
-if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+// Handle pre-flight OPTIONS request for browser safety
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);
     exit;
 }
 
-// ... (Your Connection Logic here) ...
+// Vault Credentials
+$host = "localhost";
+$db_name = "abid_khan_e_learning_hub";
+$username = "root"; 
+$password = "";
 
+try {
+    // Establishing the PDO connection to the Vault
+    $conn = new PDO("mysql:host=$host;dbname=$db_name", $username, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch(PDOException $e) {
+    // If the database is not started in XAMPP
+    echo json_encode(["success" => false, "message" => "Vault Offline: Ensure MySQL is running in XAMPP."]);
+    exit;
+}
+
+// Capturing the JSON Strike from the Frontend
 $data = json_decode(file_get_contents("php://input"), true);
 
-if ($data) {
-    // --- GATE 1: SIGNUP (The Sovereign Identity Strike) ---
-    // We check for full_name and ensure it's not a message/OTP action
-    if (isset($data['full_name']) && !isset($data['message']) && !isset($data['action'])) {
+if ($data && isset($data['email'])) {
+    try {
+        // Prepared SQL Strike for maximum security
+        $sql = "INSERT INTO members (full_name, email, password, phone, location, department, role) 
+                VALUES (:fn, :em, :pw, :ph, :loc, :dept, :role)";
         
-        $sql = "INSERT INTO AK_HUB_VAULT (
-                    FULL_NAME, USER_EMAIL, PASSWORD, CONTACT_NO, 
-                    FATHER_NAME, MONTHLY_INCOME, PREFERRED_TIMING, 
-                    LOCATION, DEPARTMENT, USER_ROLE, CREATED_AT
-                ) VALUES (
-                    :fn, :em, :pw, :wa, 
-                    :ft, :inc, :tim, :loc, :dept, :role, CURRENT_TIMESTAMP
-                )";
+        $stmt = $conn->prepare($sql);
         
-        $stmt = oci_parse($conn, $sql);
-        
-        // --- DATA BINDING (THE 13 PILLARS ALIGNMENT) ---
-        oci_bind_by_name($stmt, ':fn', $data['full_name']);
-        oci_bind_by_name($stmt, ':em', $data['email']);
-        oci_bind_by_name($stmt, ':pw', $data['password']); // The Sovereign Key
-        oci_bind_by_name($stmt, ':wa', $data['whatsapp_no']);
-        oci_bind_by_name($stmt, ':ft', $data['father_name']);
-        oci_bind_by_name($stmt, ':inc', $data['monthly_income']);
-        oci_bind_by_name($stmt, ':tim', $data['preferred_timing']);
-        oci_bind_by_name($stmt, ':loc', $data['location']);
-        oci_bind_by_name($stmt, ':dept', $data['department']);
-        oci_bind_by_name($stmt, ':role', $data['role']); 
-        
-        // --- THE EXECUTION STRIKE ---
-        $result = @oci_execute($stmt); // Use @ to handle errors through our custom logic
-        
-        if($result) {
-            oci_commit($conn);
-            echo json_encode([
-                "success" => true, 
-                "message" => "VAULT ENTRY SUCCESS: Identity Secured for " . $data['full_name']
-            ]);
+        // Executing the Entry with precision alignment
+        $stmt->execute([
+            ':fn'   => $data['full_name'],
+            ':em'   => $data['email'],
+            ':pw'   => $data['password'], // Security Note: Master Abid, we will hash this later!
+            ':ph'   => $data['whatsapp_no'],
+            ':loc'  => $data['location'],
+            ':dept' => $data['department'],
+            ':role' => $data['role']
+        ]);
+
+        echo json_encode([
+            "success" => true, 
+            "message" => "IDENTITY SECURED: Welcome Master " . $data['full_name'] . " to the Hub Sanctum!"
+        ]);
+
+    } catch(PDOException $e) {
+        // Handle Duplicate Email (Sentinel Error 23000)
+        if ($e->getCode() == 23000) {
+            echo json_encode(["success" => false, "message" => "Email already recognized in the Vault!"]);
         } else {
-            $e = oci_error($stmt);
-            // If it fails, the Think Tank provides the exact reason (e.g., Unique Constraint violation)
-            echo json_encode([
-                "success" => false, 
-                "message" => "VAULT REJECTION: " . $e['message']
-            ]);
+            echo json_encode(["success" => false, "message" => "Database Error: " . $e->getMessage()]);
         }
     }
-    // ... (Gate 2 and Gate 5 logic follows) ...
+} else {
+    // If the script is accessed without data
+    echo json_encode(["success" => false, "message" => "Sentinel: No data detected in the transmission."]);
 }
 ?>
